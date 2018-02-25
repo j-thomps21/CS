@@ -1,0 +1,10 @@
+Key Points:
+
+-> The pseudocode that we write in QTSPIM is automatically translated to single line code
+-> We can use system calls to print things to the screen such as strings or integers
+-> We can also use system calls to read in things and write to files
+-> exit terminates the program
+
+Confusing:
+
+->  what is the la command?

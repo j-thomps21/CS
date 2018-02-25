@@ -1,0 +1,398 @@
+
+\documentclass{article}[9pt]
+
+\usepackage{listings}
+\usepackage{fullpage}
+\usepackage{textcomp}
+\usepackage{mdframed}
+
+\lstset{ %
+  basicstyle=\ttfamily\small,
+  commentstyle=\ttfamily\small\emph,
+  upquote=true,
+  framerule=1.25pt,
+  breaklines=true,
+  showstringspaces=false,
+  escapeinside={(*@}{@*)},
+  belowskip=2em,
+  aboveskip=1em,
+}
+
+
+\newenvironment{answerfont}{\fontfamily{qhv}\selectfont}{\par}
+\newenvironment{myanswer}{\begin{mdframed}\begin{answerfont}}{\end{answerfont}\end{mdframed}}
+
+%\newcommand{\myanswer}[1]{\begin{mdframed}{\parbox{.85\linewidth}{\fontfamily{qhv}\selectfont{#1}}}\end{mdframed}}
+
+\title{HW 3}
+
+\author{Joshua Thompson}
+
+\date{29 JAN 2018}
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+\item (5 points) Write a small C program that uses \texttt{sizeof()} to report
+the size in byte of each the types listed below. (You don't need
+to submit the program, just the sizes.)
+
+\begin{enumerate}
+\item \texttt{int}
+
+\begin{myanswer}
+4 bytes
+\end{myanswer}
+
+
+\item \texttt{char}
+
+\begin{myanswer}
+1 byte
+\end{myanswer}
+
+
+\item \texttt{int *}
+
+
+\begin{myanswer}
+8 bytes
+\end{myanswer}
+
+\item \texttt{float *}
+
+\begin{myanswer}
+8 bytes
+\end{myanswer}
+
+\item \texttt{char *}
+
+\begin{myanswer}
+8 bytes
+\end{myanswer}
+
+\item \texttt{short}
+
+\begin{myanswer}
+2 bytes
+\end{myanswer}
+
+\item \texttt{int **}
+
+\begin{myanswer}
+8 bytes
+\end{myanswer}
+
+
+\item \texttt{float}
+
+\begin{myanswer}
+4 bytes
+\end{myanswer}
+
+\item \texttt{double}
+
+\begin{myanswer}
+8 bytes
+\end{myanswer}
+
+
+\End{enumerate}
+
+\item (5 Points) For the sizes above, why is it that all the pointer types, even
+the double pointer, have the same size in bytes?
+
+
+\begin{myanswer}
+Because pointers are really just addresses. The addresses are all the same length and can either point to arrays of values or to the values themselves.
+\end{myanswer}
+
+
+\item (10 points) Rewrite the following C++ code in C:
+
+\begin{lstlisting}[language=c]
+#include <stdio>
+using namespace std;
+
+int main(int argc, char *argv[]){
+
+ int j=10;
+ int k;
+
+ cout << "Enter a number" << endl;
+ cin >> k;
+
+ cout << "Num+10: " << k + 10 << endl;
+}
+\end{lstlisting}
+
+\begin{myanswer}
+\begin{lstlisting}[language=c]
+#include <stdio>
+using namespace std;
+
+int main(int argc, char *argv[]){
+
+int j=10;
+  int k;
+
+  printf("Enter a number ");
+  scanf("%d", &k);
+  k += j;
+  printf("Num+10: %d\n", k);
+  return 0;
+}
+\end{lstlisting}
+\end{myanswer}
+
+
+
+\item (10 points) Complete the program below to print "Go Navy" to a new file
+called \texttt{gonavy.txt}, "Beat Army" to a \texttt{beatarmy.txt}, and "Crash
+Airforce" to standard error.
+
+\begin{lstlisting}[language=c]
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char * argv[]){
+
+   FILE * gonavy, *beatarmy;
+
+   //WRITE THE REST!
+
+}
+\end{lstlisting}
+
+\begin{myanswer}
+\begin{lstlisting}[language=c]
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char * argv[]){
+
+   FILE * gonavy, *beatarmy;
+
+   gonavy = fopen("gonavy.txt", "w");
+   fprintf(gonavy, "Go Navy\n");
+   fclose(gonavy);
+
+   beatarmy = fopen("beatarmy.txt", "w");
+   fprintf(beatarmy, "Beat Army\n");
+   fclose(beatarmy);
+
+   fprintf(stderr, "Crash Airforce\n");
+   return 0;
+}
+\end{lstlisting}
+
+\end{myanswer}
+
+\item (10 points) For the following program snippet below, there are at least
+\textbf{four} errors. Enumerate them.
+
+\begin{lstlisting}[language=c]
+for( int i=0 ; i<5 , i--){
+   printf(i)
+}
+\end{lstlisting}
+
+\begin{myanswer}
+-The interger i must be declared before the for loop.\\
+-In order for the loop to loop 5 times the end statement should be "i++" instead of "i--"\\
+-the printf statement should have a semicolon at the end\\
+-The printf statement should be written like this printf("%d", i);
+\end{myanswer}
+
+\item (10 points) For the following code snippets, what is the output and explain
+that output? (Yes, you should program and run these program to
+determine the output!)
+
+\begin{enumerate}
+\item
+
+\begin{lstlisting}[language=c]
+unsigned int i = 4294967295;
+printf("%d\n",i);
+\end{lstlisting}
+
+
+\begin{myanswer}
+The output is -1. unsigned intergers are not supposed to return negative numbers because of how they are written. This means that the given value for i was too large so it returned -1 as an error.
+\end{myanswer}
+
+\item
+
+\begin{lstlisting}[language=c]
+int i = 3.1519;
+printf("%d\n", i);
+\end{lstlisting}
+
+
+\begin{myanswer}
+The output was 3 because the type of the variable is int. This means that it will not take any decimal values. The number was cut to 3.
+\end{myanswer}
+
+
+\item
+\begin{lstlisting}[language=c]
+int i = (int) 1.5 + 2.5 + 3.5 + 4.5
+printf("%d\n",i);
+\end{lstlisting}
+
+\begin{myanswer}
+The output is 11. This is because there is a call stating that it wants 1.5 to be evaluated as int. Therefore it is shortened to just 1. Then the operation is carried out as normal which results in 11.5. 11.5 is then assigned to int variable i which shortens 11.5 to just 11.
+\end{myanswer}
+
+\end{enumerate}
+
+\item (10 points) Consider the program snippet below and the memory diagram representing
+that programs state at MARK 0. Complete a stack diagram for each
+of the remaining MARKS 1-4.
+
+\begin{lstlisting}[language=c]
+int a=0,b=0,*p;
+p = &b; /* (0) */
+
+*p = 15; /* (1) */
+
+a = b;
+
+b = 25; /* (2) */
+
+p = &a; /* (3) */
+
+(*p)++; /* (4) */
+\end{lstlisting}
+
+Mark 0 Diagram
+\begin{verbatim}
+.----.----.
+| a  |  0 |
+|----|----|
+| b  |  0 | <-.
+|----|----|   |
+| p  |  .-+---'
+'----'----'
+\end{verbatim}
+
+\begin{myanswer}
+\begin{verbatim}
+Mark 1:
+.----.----.
+| a  |  0 |
+|----|----|
+| b  | 15 | <-.
+|----|----|   |
+| p  |  .-+---'
+'----'----'
+Mark 2:
+.----.----.
+| a  | 15 |
+|----|----|
+| b  | 25 | <-.
+|----|----|   |
+| p  |  .-+---'
+'----'----'
+Mark 3:
+.----.----.
+| a  | 15 | <-.
+|----|----|   |
+| b  | 25 |   |
+|----|----|   |
+| p  |  .-+---'
+'----'----'
+Mark 4:
+.----.----.
+| a  | 16 | <-.
+|----|----|   |
+| b  | 25 |   |
+|----|----|   |
+| p  |  .-+---'
+'----'----'
+\end{verbatim}
+\end{myanswer}
+
+\item (10 points) What is the values of the array after this code completes?
+
+\begin{lstlisting}[language=c]
+//statically declaring an array
+int array[10] = {0,1,2,3,4,5,6,7,8,9};
+int * p = array+3;
+
+p[0]=2018;
+
+//  ****ARRAY = [0,1,2,2018,4,5,6,7,8,9]****
+\end{lstlisting}
+
+\item (10 points) You are trying to copy an array from to another, and you write the following code:
+
+\begin{lstlisting}[language=c]
+int a[10] = {0,1,2,3,4,5,6,7,8,9};
+int b[10];
+
+//copy from a to b
+b=a;
+\end{lstlisting}
+
+
+\begin{enumerate}
+\item Why is this code incorrect?
+
+
+\begin{myanswer}
+This code is incorrect because the variable only holds the ADDRESS to the array, not the actual contents. When you put the statement b=a that only means that b will now point to the same array as a.
+\end{myanswer}
+
+
+\item Write a corrected code segment by replacing the offensive part
+of the code above to copy the values in \texttt{a} to \texttt{b}.
+
+\begin{myanswer}
+int i;
+  for(i = 0; i < 10; i++)
+  b[i] = a[i];
+\end{myanswer}
+
+\end{enumerate}
+
+\item (10 points) The program below has at least three things wrong
+with them. Enumerate them and write the corrected code.
+
+\begin{lstlisting}[language=c]
+#include <stdlib.h>
+int main( int argc, char * argv[]){
+  file * stream;
+
+  stream = open("file.txt", "r");
+
+  fprintf(stream, "Hello World");
+
+  return 0;
+}
+\end{lstlisting}
+
+\begin{mdframed}
+-instead of "#include <stdlib.h>" we need <stdio.h>\\
+-we need FILE * stream (file needs to be all caps)\\
+- stream = open should be FILE * stream = fopen("file.txt", "r")\\
+-the fopen command also is in read mode when it should be in write\\
+\\
+\\CODE\\
+int main(int argc, char * argv[]) {\\
+  FILE * stream;\\
+  stream = fopen("file.txt", "w");\\
+  fprintf(stream, "Hello World");\\
+  fclose(stream);\\
+  return 0;\\
+}
+\end{mdframed}
+
+\end{enumerate}
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

@@ -1,0 +1,20 @@
+Key Points
+
+-> Technology has grown at an insane rate
+-> Silicon is the basis of technology
+  -> Long complicated process
+-> Time is the best measurement for performance
+-> CPU performance vs instruction performance
+-> benchmarking programs are used to measure performance
+-> Fallacies
+  -> Computers at low utilization use little power
+  -> Designing for performance and designing for energy efficiency are unrelated goals
+-> Pitfalls
+  -> Expecting a performance increase in one area of the computer to result in overall performance increase of the computer
+  -> Using a subset of the performance equation as a performance metric
+-> Remember:
+  -> Datapath
+  -> control
+  -> Memory
+  -> Input
+  -> Output

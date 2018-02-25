@@ -1,0 +1,140 @@
+
+\documentclass{article}[9pt]
+
+\usepackage{listings}
+\usepackage{fullpage}
+\usepackage{textcomp}
+
+\lstset{ %
+  basicstyle=\ttfamily\small,
+  commentstyle=\ttfamily\small\emph,
+  upquote=true,
+  framerule=1.25pt,
+  breaklines=true,
+  showstringspaces=false,
+  escapeinside={(*@}{@*)},
+  belowskip=2em,
+  aboveskip=1em,
+}
+
+
+\newcommand{\myanswer}[1]{\framebox[.9\linewidth]{\parbox{.9\linewidth}{\fontfamily{qhv}\selectfont{#1}}}}
+
+\title{HW 1}
+
+\date{17 JAN 2018}
+
+\author{Joshua Thompson}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+\item (10 points) What are the three components of a Unix system?
+  Provide an example of the interaction from a user perspective down
+  to the hardware and back up.
+
+      \myanswer{Three main components are user space, kernel space, hardware. Pressing a key on the keyboard is an example of input from the hardware, the keypress being read by the kernel, and eventually processed back out to show up on the monitor.}
+
+\item (15 points) Consider the {\tt ls -l} output below, label the
+  output appropriately:
+
+\begin{lstlisting}
+drwxr-xr-x 2 aviv scs 4096 2013-12-22 10:57 demo/
+-rw-r--r-- 1 aviv scs 13454 2013-12-22 10:56 text.dat
+\end{lstlisting}
+
+      \myanswer{The first character decides whether the listing is a directory or a file. The next parts tell the permissions that the use, group and global have with that particular directory or file. The "aviv" describes who the owner of the directory or file is, and after that the group. The following number shows the file size in bytes. After that is the date when it was last modified. The date is followed by the name of the directory or filename.}
+
+\item (15 points) For the following commands, determine in which bin directory they live by using which command on a lab machine
+
+  \begin{enumerate}
+    \item {\tt ls}
+
+      \myanswer{/bin/ls}
+
+    \item {\tt which}
+
+      \myanswer{/usr/bin/which}
+
+    \item {\tt tac}
+
+      \myanswer{/usr/bin/tac}
+
+    \item {\tt grep}
+
+      \myanswer{/bin/grep}
+
+    \item {\tt cut}
+
+      \myanswer{/usr/bin/cut}
+
+    \item {\tt chmod}
+
+      \myanswer{/bin/chmod}
+
+    \item {\tt head}
+
+      \myanswer{/usr/bin/head}
+
+    \item {\tt mv}
+
+      \myanswer{/usr/bin/mv}
+
+  \end{enumerate}
+
+
+\item (10 points) Look up the {\tt tac} command in the man
+  pages. Describe its operations, and give an example usage.
+
+      \myanswer{The tac command is used to concatenate and print out files in reverse. // Ex: tac breh.txt}
+
+\item (15 points) What are the three guiding principles of the Unix
+  design philosophy?
+
+      \myanswer{1. Write programs that do one thing and do it well. // 2. Write programs to work together. // 3. Write programs to handle text streams.}
+
+\item (10 points) What are the primary purpose of standard input, output, and error for different programs?
+
+      \myanswer{The purpose is to make it easier to programs to work together. The standard output of one program could be used as an input for another program, but standard error cannot be used as an input. }
+
+\item (15 points) Consider the following command line with redirects:
+
+\begin{lstlisting}
+grep PA < sample-db.csv 2> oops > sample-db.PA.csv
+\end{lstlisting}
+
+\begin{enumerate}
+
+\item What is the output file?
+
+      \myanswer{The output file is sample-db.PA.csv}
+
+\item What is the input file?
+
+      \myanswer{Input file is sample-db.csv}
+
+\item What is the error file?
+
+      \myanswer{oops is the error file.}
+
+
+
+
+\end{enumerate}
+
+\item (10 points) Using a pipeline as an example, why is it necessary to have standard error and standard output?
+
+
+      \myanswer{It is necessary to specify standard error and standard output because without that, standard error would be seen as the output of the program. For example, if you try to cat a file that doesnt exist, an error prints to the screen. Without standard error, that could be seen as the output of the program and if using a pipeline, that error would just be sent to the next program.}
+
+\end{enumerate}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

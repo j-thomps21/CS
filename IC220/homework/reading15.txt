@@ -1,0 +1,9 @@
+Key Points:
+-> Constraint in clock system is that the signals must be valid
+  -> If run long enough some logic will eventually return valid 
+-> Memory elements include Flip-Flops and latches (simplest elements)
+-> Lots of different ways to make logic gates
+-> Can use register files for inputs into the mux
+
+Parts that Confuse me:
+-> How can a gate work when it takes in an output that hasnt been created yet?

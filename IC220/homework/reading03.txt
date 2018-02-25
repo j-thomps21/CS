@@ -1,0 +1,20 @@
+Key Points:
+-> beq = branch equal
+-> bne = branch not equal
+-> goes to the third statement if the first two satisfy the command
+-> use the Else for the third statement to write if, else statements
+-> use loop command to create loops
+-> jump table
+->
+->
+->
+
+
+Confusing:
+-> basic block?
+->
+->
+->
+->
+->
+->

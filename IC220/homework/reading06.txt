@@ -1,0 +1,23 @@
+Key points:
+
+-> procedures us abstraction to make programming easier
+  -> allows code to be reused
+-> Six steps for procedures
+  -> 1. procedure needs to access parameters
+  -> 2. transfer control to the procedure
+  -> 3. Acquire storage resources for the procedure
+  -> 4. do the task
+  -> 5. put the result in a place where procedure can access
+  -> 6. return to the point of origin
+-> use registers as much as possible
+-> sometimes we need to use more registers than are allotted. This is where we go to the memory
+-> Theres basically a register for everything
+-> we use ASCII to represent text in computing
+  -> each character is 1 byte
+-> Three ways to process strings
+  -> First position of the string gives the length of the string
+  -> There is a variable that comes with the string that gives the length
+  -> There is a character after the last character which is marked by NULL (marks the end)
+-> Unicode uses 16 bits to represent each character. Lots of alphabets
+-> Sometimes there is a need for large constants and addresses
+-> Jump is simple 

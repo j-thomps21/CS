@@ -1,0 +1,27 @@
+Key Points:
+
+-> most computer languages are quite similar
+  -> this is because computers are built on similar principles
+      -> Design Principle 1: Simplicity favors regularity
+-> the compiler must break come complex statements down for the assembler to understand
+      -> Design Principle 2: Smaller is faster
+-> MIPS uses registers which are typically two character names. 32 of them
+-> accessing in register is faster than in memory
+-> machine language is base two (binary)
+-> people have easier time writing in hex
+      -> Design principle 3: Good design demands good compromise
+          -> MIPS designers decided to make every instruction the same length
+-> Logical operation classes
+  -> shift
+  -> AND
+  -> OR
+  -> NOT
+  -> NOR
+    -> the NOT of the OR function
+
+
+Confusing:
+
+-> load word?
+-> r format?
+-> r type?

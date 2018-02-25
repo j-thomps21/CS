@@ -1,0 +1,147 @@
+
+\documentclass{article}[9pt]
+
+\usepackage{listings}
+\usepackage{fullpage}
+\usepackage{textcomp}
+
+\lstset{ %
+  basicstyle=\ttfamily\small,
+  commentstyle=\ttfamily\small\emph,
+  upquote=true,
+  framerule=1.25pt,
+  breaklines=true,
+  showstringspaces=false,
+  escapeinside={(*@}{@*)},
+  belowskip=2em,
+  aboveskip=1em,
+}
+
+
+\newcommand{\myanswer}[1]{\framebox[.9\linewidth]{\parbox{.85\linewidth}{\fontfamily{qhv}\selectfont{#1}}}}
+
+\title{HW 2}
+
+\author{Joshua Thompson}
+
+\date{22 JAN 2018}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+
+\item (10 points) Consider the \texttt{ls -l} output below, label the output
+appropriately:
+
+\begin{verbatim}
+drwxr-xr-x 2 aviv scs 4096 2013-12-22 10:57 demo/
+-rw-r--r-- 1 aviv scs 13454 2013-12-22 10:56 text.dat
+\end{verbatim}
+
+\item (10 points) Describe the permission strings below in plain English? What
+permission does the owner have, group have, and other have?
+
+\begin{enumerate}
+
+\item \texttt{rwxrw-rw-}
+
+      \myanswer{Owner: read, write execute. Group: read, write. Global: read, write.}
+
+\item \texttt{r-x-{}-x-{}-x}
+
+      \myanswer{Owner: read, execute. Group: execute. Global: execute.}
+
+\item \texttt{rw-rw-r-{}}
+
+      \myanswer{Owner: read, write. Group: read, write. Global: read.}
+
+\end{enumerate}
+
+\item (20 points) Using the man page (or \textbf{trying it yourself in the terminal})
+describe the resulting action of the following \texttt{chmod} commands.
+
+\begin{enumerate}
+
+\item \texttt{chmod a+x file}
+
+      \myanswer{Gives all users (User, group, and global) execute privileges.}
+
+\item \texttt{chmod u+x file}
+
+      \myanswer{Gives the user execute privileges.}
+
+\item \texttt{chmod a-w file}
+
+      \myanswer{Takes away all write privileges.}
+
+\item  \texttt{chmod g+rw file}
+
+      \myanswer{Gives group read and write privileges}
+
+\end{enumerate}
+
+\item (10 points) On a lab computer, type \texttt{groups} into the shell. What groups are
+you in?
+
+      \myanswer{ I am in the "cfy gp mids" group }
+
+\item (10 points) In what configuration is the following information found?
+
+  \begin{enumerate}
+
+\item The list of all users on the systems?
+
+      \myanswer{Stated in the /etc/passwd file. Last name, First name, Midn, USN, etc}
+
+\item The default group of a user?
+
+      \myanswer{Question not worded well. Unsure of what it is asking}
+
+\item The list of all groups and members (perhaps not the default group?)
+
+      \myanswer{Question not worded well. Unsure of what it is asking}
+
+\end{enumerate}
+
+\item (20 points) On a lab computer, run \texttt{\textasciitilde{}aviv/bin/ic221-up} and change into the
+\texttt{hw/02} directory. There is a program called \texttt{runme}. Change the
+permission of this program such that is executable and run it.
+
+\begin{enumerate}
+
+\item What command did you use to run it?
+
+      \myanswer{I used the ./ command to run the program}
+\item What is the output of running the command?
+
+      \myanswer{The output is 4 cat looking things. With the middle two looking at each other.}
+
+\end{enumerate}
+\item (20 points) Use \texttt{ls} to list the directory \texttt{\textasciitilde{}aviv/ic221-hw/hw02/} where
+you'll find a secret file called \texttt{secret} that you \textbf{do not} have
+permission to execute.
+
+\begin{enumerate}
+
+\item Explain how you could still execute this program despite not having group
+  or global execute permissions?
+
+      \myanswer{I copied the secret program into my own directory which in turn made me the owner of the file}
+
+\item Do so, and what is the output?
+
+      \myanswer{The output is a submarine}
+
+\end{enumerate}
+
+\end{enumerate}
+
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

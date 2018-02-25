@@ -1,0 +1,44 @@
+Key Points:
+
+  -> computers are pretty important
+  -> Types: PCs, servers, embedded computers
+  -> improving performance has a variety of meanings
+    -> today best way to improve performance is to reduce power usage
+  -> Moore's law
+  -> Abstraction
+  -> Common Case fast
+  -> Parallelism
+  -> Performance via pipeline
+  -> Performance via prediction
+  -> Hierarchy of memory
+  -> Redundancy
+  -> Operating system handles many key functions
+    -> handles basic I/O operations
+    -> allocates storage and memory
+    -> shares multiple applications and can use simultaneously
+  -> compilers translate code into something that the hardware can execute
+  -> computing language is binary
+  -> assembler translates symbolic notation into binary
+  -> Big Picture: five classic components are
+    -> input
+    -> output
+    -> memory
+    -> data path
+    -> control
+  -> datapath controls arithmetic operations while control tells datapath, I/O, memory what to do based on instructions
+  -> DRAM is basically RAM but takes same amount of time to access programs in any order
+  -> Cache is a buffer for DRAM and is called SRAM (static RAM)
+  -> silicon is the bread and butter of our society today
+  -> processors are made through a meticulous process of turning silicon into wafers and removing impurities, also adding chemicals
+  -> performance depends on the definition
+  -> time is the measure of computer performance
+  -> The speed increase of processors has slowed recently because of cooling.
+    -> We need to focus on making processors that use less power (and therefore don't get as hot)
+    -> Though the new CPUs use less power than before, they are still faster than previous generations though the speed increase is not as significant
+  -> Less power is also very important for battery life for phones, tablets, and laptops
+  -> Hardware has now added multicore microprocessors to increase throughput
+  -> This forces programmers to rewrite code in order to fully utilize all the cores of the processors (optimize)
+  -> Parallelism helps speed up the process
+    -> difficult to do though
+
+  Very interesting stuff 

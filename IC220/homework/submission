@@ -1,0 +1,3 @@
+
+~/bin/submit -c=IC220 -p=R06 reading06.txt
+~/bin/submit -c=IC220 -p=spim_lab 
