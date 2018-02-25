@@ -1,0 +1,29 @@
+Design:
+
+
+      Class Dot:
+
+          -> dataFields
+              ->  Char for color
+              ->  Row number
+              ->  Col number
+              ->  Direction integer (1 = up, 2 = right, 3 = down, 4 = left)
+
+
+          -> methods
+              -> Simulate a round (move either row or col by one based on direction)
+              -> random change to direction
+              -> toString()
+              -> Iter (probably)
+              -> node
+              -> Queue
+
+
+      Class DotQueue:
+          -> dataFields
+              -> head, data
+
+          -> methods
+              -> enqueue
+              -> dequeue? prolly not
+              ->
