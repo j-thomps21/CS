@@ -24,7 +24,7 @@
 
 \title{HW 6}
 
-\author{PUT YOUR NAME HERE}
+\author{Joshua Thompson}
 
 \date{27 FEB 2017}
 
@@ -41,7 +41,7 @@ oppose to having each user perform the same operations
 themselves?
 
 \begin{myanswer}
-write your answer here
+Because the user could do damage to the operating system if they write code at such a low level.
 \end{myanswer}
 
 
@@ -56,33 +56,33 @@ write your answer here
 \item fread()
 
 \begin{myanswer}
-write your answer here
+not a system call
 \end{myanswer}
 
 \item write()
 
 \begin{myanswer}
-write your answer here
+system call
 \end{myanswer}
 
 \item stat()
 
 \begin{myanswer}
-write your answer here
+system call
 \end{myanswer}
 
 
 \item mmap()
 
 \begin{myanswer}
-write your answer here
+system call
 \end{myanswer}
 
 
 \item execv()
 
 \begin{myanswer}
-write your answer here
+not a system call
 \end{myanswer}
 
 \end{enumerate}
@@ -92,7 +92,7 @@ program. Use \texttt{ltrace} to enumerate the library function calls
 occurring under \texttt{main()}.
 
 \begin{myanswer}
-write your answer here
+The program uses the strlen, puts, fflush and exit library calls.
 \end{myanswer}
 
 \item (10 points) Run \texttt{ic221-up}. In the \texttt{hw/06/prob4} directory you'll find a compiled
@@ -100,7 +100,7 @@ program. Use \texttt{strace} to enumerate the system function calls
 occurring under \texttt{main()}.
 
 \begin{myanswer}
-write your answer here
+There are several system calls being used. brk, openat, fstat, read, fstat, mmap, mprotect, close, stat, write.
 \end{myanswer}
 
 \item (20 points) Consider a file, \texttt{accts.dat}, which stores 1000 accounts
@@ -143,7 +143,39 @@ int main(int argc, char *argv[]){
 \end{lstlisting}
 
 \begin{myanswer}
-write your answer here
+\begin{lstlisting}[language=c]
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+typedef struct
+{
+  long acctnum;
+  double bal;
+  char acctname[1024];
+} acct_t;
+
+void read_accts(acct_t** accts, char* fname)
+{
+  int fd;
+  fd = open(fname, O_RDONLY);
+  read(fd, &accts, 1000*sizeof(acct_t));
+  close(fd);
+}
+
+int main(int argc, char *argv[]) {
+  acct_t* accts;
+  read_accts(&accts, argv[1]);
+
+  int i;
+  for(i = 0; i < 1000; i++)
+  {
+    printf("%ld (%f) -- %s\n", accts[i].acctnum, accts[i].bal, accts[i].acctname);
+  }
+  return 0;
+}
+\end{lstlisting}
 \end{myanswer}
 
 \item (10 points) Complete the following ORing options that matching the \texttt{fopen()} permissions:
@@ -151,31 +183,31 @@ write your answer here
 \item \texttt{r}
 
 \begin{myanswer}
-write your answer here
+O_RONLY
 \end{myanswer}
 
 \item \texttt{w}
 
 \begin{myanswer}
-write your answer here
+O_WRONLY
 \end{myanswer}
 
 \item \texttt{a}
 
 \begin{myanswer}
-write your answer here
+O_APPEND
 \end{myanswer}
 
 \item \texttt{w+}
 
 \begin{myanswer}
-write your answer here
+O_CREATE
 \end{myanswer}
 
 \item \texttt{r+}
 
 \begin{myanswer}
-write your answer here
+O_APPEND
 \end{myanswer}
 
 \end{enumerate}
@@ -194,25 +226,25 @@ write your answer here
 \item 0777
 
 \begin{myanswer}
-write your answer here
+020
 \end{myanswer}
 
 \item 0640
 
 \begin{myanswer}
-write your answer here
+000
 \end{myanswer}
 
 \item 0740
 
 \begin{myanswer}
-write your answer here
+000
 \end{myanswer}
 
 \item 0501
 
 \begin{myanswer}
-write your answer here
+001
 \end{myanswer}
 
 \item 0651
@@ -221,7 +253,7 @@ write your answer here
 \item (5 points) Explain why the umask is considered a security feature.
 
 \begin{myanswer}
-write your answer here
+umask ensures that we do not create a file with more permissions than what we want. 
 \end{myanswer}
 
 \end{enumerate}
