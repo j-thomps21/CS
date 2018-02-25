@@ -48,9 +48,6 @@ Because the user could do damage to the operating system if they write code at s
 \item (10 points) Look up the following C functions in the man page, label them as
 either a system call or not a system call.
 
-\begin{myanswer}
-write your answer here
-\end{myanswer}
 
 \begin{enumerate}
 \item fread()
@@ -183,31 +180,41 @@ int main(int argc, char *argv[]) {
 \item \texttt{r}
 
 \begin{myanswer}
+\begin{lstlisting}
 O_RONLY
+\end{lstlisting}
 \end{myanswer}
 
 \item \texttt{w}
 
 \begin{myanswer}
+\begin{lstlisting}
 O_WRONLY
+\end{lstlisting}
 \end{myanswer}
 
 \item \texttt{a}
 
 \begin{myanswer}
+\begin{lstlisting}
 O_APPEND
+\end{lstlisting}
 \end{myanswer}
 
 \item \texttt{w+}
 
 \begin{myanswer}
+\begin{lstlisting}
 O_CREATE
+\end{lstlisting}
 \end{myanswer}
 
 \item \texttt{r+}
 
 \begin{myanswer}
+\begin{lstlisting}
 O_APPEND
+\end{lstlisting}
 \end{myanswer}
 
 \end{enumerate}
@@ -244,11 +251,10 @@ octal.
 \end{myanswer}
 
 \item 0651
-\end{enumerate}
-
 \begin{myanswer}
 021
 \end{myanswer}
+\end{enumerate}
 
 \item (5 points) Explain why the umask is considered a security feature.
 
