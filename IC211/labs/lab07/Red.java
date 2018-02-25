@@ -1,3 +1,6 @@
+import java.util.*;
+import java.io.*;
+
 public class Red extends MovingDot
 {
   private static final char C = 'r';
@@ -7,27 +10,20 @@ public class Red extends MovingDot
     super(r,c);
   }
 
+  public boolean check(int n)
+  {
+    return ifDirChange(n);
+  }
+
 
   public String toString()
   {
     return super.toString() + C;
   }
 
-
-  public void dirChange()
+  public boolean ifDirChange(int round)
   {
-    int i = rand.nextInt(3)
-      if(i == 1)
-      {
-        direction--;
-        if(direction < 1)
-          direction = 4;
-      }
-      else if(i == 2)
-      {
-        direction++;
-        if(direction > 4)
-          direction = 1;
-      }
+    return true;
   }
+
 }
