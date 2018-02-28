@@ -1,20 +1,19 @@
-public class DotQueue
+public class MovingDotQueue
 {
   private Node head, tail;
 
-
   private class Node
   {
-    public Dot data;
+    public MovingDot data;
     public Node next;
-    public Node(Dot d, Node n)
+    public Node(MovingDot d, Node n)
     {
       data = d;
       next = n;
     }
   }
 
-  public enqueue(Dot d)
+  public void enqueue(MovingDot d)
   {
     if(head == null)
     {
@@ -33,7 +32,7 @@ public class DotQueue
   }
 
 
-  private class Iter
+  protected class Iter
   {
     private Node curr;
     public Iter(Node start)
@@ -46,10 +45,10 @@ public class DotQueue
       return curr != null;
     }
 
-    public Dot next()
+    public MovingDot next()
     {
-      Dot d = curr.data;
-      curr = curr.next();
+      MovingDot d = curr.data;
+      curr = curr.next;
       return d;
     }
   }

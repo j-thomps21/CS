@@ -12,7 +12,7 @@ public class Blue extends MovingDot
 
   public String toString()
   {
-    return super.toString();
+    return super.toString() + " " + C;
   }
 
   public boolean ifDirChange(int round)
@@ -23,8 +23,10 @@ public class Blue extends MovingDot
     return check;
   }
 
-  public boolean check(int n)
+  public void round(int round)
   {
-    return ifDirChange(n);
+    if(ifDirChange(round))
+      dirChange(this.rand);
+    step();
   }
 }

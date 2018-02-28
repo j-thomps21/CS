@@ -8,7 +8,7 @@ public class MovingDot extends Dot
   public MovingDot(int r, int c)
   {
     super(r, c);
-    direction = rand.nextInt(4);
+    direction = this.rand.nextInt(4);
   }
 
   public void step()
@@ -23,7 +23,7 @@ public class MovingDot extends Dot
       this.subCol();
   }
 
-  public void dirChange()
+  public void dirChange(Random rand)
   {
     int i = rand.nextInt(3);
     if(i == 1)
@@ -44,9 +44,9 @@ public class MovingDot extends Dot
     return super.toString();
   }
 
-  public boolean check(int n)
+  public void round(int round)
   {
-    return true;
+    String s = " ";
   }
 
 }

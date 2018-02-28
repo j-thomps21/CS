@@ -1,0 +1,74 @@
+Design:
+
+PART 1://////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+The way I decided to tackle this problem was to create a linked list of dots, adding two dots to that linked list every 200 rounds
+or whatever number is specified by the user. I separated the dot classes into the topmost Dot class which branched into the MovingDot
+class and then branching to the different colored dots. Each of the classes has their own methods and data fields which interact
+with each other. It is quite easy to see how inheritance is being utilized, and data hiding is in use for all the data fields.
+I used polymorphism by choosing to create a linked list of MovingDots which are actually the branched classes of the MovingDot classes
+(ie. Blue, Red).
+
+      ////////////////////////////////////////////
+      Class Dot:
+
+          -> dataFields
+              ->  Row number
+              ->  Col number
+              ->  Random class field
+
+          -> methods
+              -> toString()
+              -> Several increment methods to increase or decrease the rows or cols by one
+
+
+      ////////////////////////////////////////////
+      Class MovingDot (extension of Dot class):
+
+          -> dataFields
+              -> integer for  direction
+
+          -> methods
+              ->  step method that Simulates a single step in the direction
+              ->  dirChange method that takes rand and determines whether a direction change takes place or not
+              ->  toString method
+              ->  a round method that is simply there for polymorphism
+
+
+      ////////////////////////////////////////////
+      Class Red and Blue (extensions of MovingDot)
+
+          -> dataFields
+              -> char character that has the letter that describes the color
+
+          -> methods
+              ->  toString
+              ->  ifDirChange (for Blue because of special attribute)
+              ->  round method that simulates a round through dirChange and taking a step
+
+
+      ////////////////////////////////////////////
+      Class MovingDotQueue:
+          -> nested classes
+              -> Iterator class
+              -> Node class
+
+          -> dataFields
+              -> nodes for the head and tail
+
+          -> methods
+              -> enqueue
+              -> hasNext method for iterator
+              -> Next method for iterator
+              -> iterator method to create new iterator
+
+
+PART 2://////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+The new OOP design makes adding new types of Dots easy because I can now just declare them as extensions of the MovingDot classes
+and give them new attributes without having to change any of the other classes. It is a very simple and elegant method to program which
+allows for plenty of functionality.
+
+The main polymorphic calls being made in the program are in the nested while loop where the iterator is making a temp MovingDot. Here,
+it is making a polymorphic toString call, and a polymorphic round call. These calls are essential because without these calls,
+the dots would not move, they would just stay in place. 

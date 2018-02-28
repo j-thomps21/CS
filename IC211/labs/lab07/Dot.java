@@ -1,5 +1,9 @@
+import java.util.*;
+import java.io.*;
+
 public class Dot
 {
+  public static Random rand = new Random(System.currentTimeMillis());
   private int row, col;
 
   public Dot(int r, int c)
@@ -24,7 +28,4 @@ public class Dot
 
   public void incCol()
   { col++; }
-
-  public void step(){ String s = ""; }
-
 }

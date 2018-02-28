@@ -10,20 +10,15 @@ public class Red extends MovingDot
     super(r,c);
   }
 
-  public boolean check(int n)
-  {
-    return ifDirChange(n);
-  }
-
-
   public String toString()
   {
-    return super.toString() + C;
+    return super.toString() + " " + C;
   }
 
-  public boolean ifDirChange(int round)
+  public void round(int round)
   {
-    return true;
+    this.dirChange(this.rand);
+    step();
   }
 
 }
