@@ -33,11 +33,17 @@ int main(int argc, char * argv[]){
   }
 
   //foreach entry in the directory
-  while( NULL != (entry = readdir(dir_p)) ){
+  while( NULL != (entry = readdir(dir_p)) )
+  {
 
     //Name of current file is entry->d_name
-    //You can call stat(entr->d_name, ....) like so
+    stat(entry->d_name, &filestat);
 
+    strmode(filestat.st_mode, mode_str);
+    pwd = getpwuid(filestat.st_uid);
+    grp = getgrgid(filestat.st_gid);
+    //You can call stat(entr->d_name, ....) like so
+    printf("%s\t%s\t%s\t%s\t%ld\t%s", mode_str, entry->d_name, pwd->pw_name,  grp->gr_name,filestat.st_size, (ctime(&(filestat.st_mtime))));
     //TODO Complete the listing for each entry
 
   }
