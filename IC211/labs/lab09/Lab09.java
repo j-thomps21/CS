@@ -1,7 +1,15 @@
 import java.util.*;
 import java.io.*;
 
-public class Lab09a {
+/**
+Lab09 that contains the bulk of the lab
+@author Thompson, Joshua - 206360
+*/
+public class Lab09 {
+  /**
+  Main method that does everything. Creates a mini shell that adds to a queue based on
+  certain input commands given by the user. Also takes options for files and verbose mode
+  */
   public static void main(String[] args) {
     String fname = null;
     boolean verbose = false, file = false;
