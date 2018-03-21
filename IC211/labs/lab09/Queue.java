@@ -13,7 +13,7 @@ public class Queue
   public String dequeue() throws Throwable
   {
     Node t = head;
-    if(head.next == null)
+    if(head == null)
       throw new QueueException("dequeue empty queue");
 
     head = head.next;

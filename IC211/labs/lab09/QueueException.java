@@ -7,5 +7,4 @@ public class QueueException extends RuntimeException
     super(msg);
   }
 
-  //public QueueException(String msg, )
 }
