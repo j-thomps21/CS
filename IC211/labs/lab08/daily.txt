@@ -1,0 +1,4 @@
+every 14 days start 1/6/2017 income Paycheck
+every 7 days start 1/5/2017 expense Dinner Out
+every 7 days start 1/4/2017 expense Groc
+every 21 days start 1/17/2017 expense Happy Hour

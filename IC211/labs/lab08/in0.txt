@@ -1,0 +1,17 @@
+every 14 days start 1/6/2017 income Paycheck
+every 1 months start 1/15/2017 expense Mortgage Due
+every 1 months start 1/6/2017 expense Cable Due
+every 3 months start 3/21/2017 expense Water/Sewer Due
+every 3 months start 3/26/2017 income Stock Dividend
+every 1 months start 1/23/2017 expense Credit Card Due
+every 1 months start 1/11/2017 expense Car Payment Due
+every 1 months start 1/2/2017 expense Car Insurance Due
+every 1 months start 1/17/2017 expense Cell Phone Due
+every 1 days start 1/7/2017 prob 0.143 expense Groceries
+every 1 days start 1/1/2017 prob 0.15 expense Dinner Out
+every 7 days start 1/3/2017 prob 0.5 expense Breakfast Out
+every 4 days start 1/1/2017 prob 0.5 expense Gas
+every 1 days start 1/1/2017 prob 0.01 expense Car Repair
+every 12 months start 4/15/2017 expense Taxes Due
+every 1 months for 12 start 1/16/2017 expense Lazy Boy Layaway Payment Due
+
