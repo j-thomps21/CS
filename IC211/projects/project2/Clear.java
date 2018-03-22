@@ -1,7 +1,11 @@
 /**
+class Clear that implements the functions from encryptor
+@author Thompson, Joshua - 206360
 */
 public class Clear implements Encryptor {
   /**
+  Method that tells what implementation of Encryptor this is.
+  @return string clear
   */
   public String getAlgName()
   {
@@ -9,6 +13,7 @@ public class Clear implements Encryptor {
   }
 
   /**
+
   */
   public void   init(char[] key) throws Throwable
   {

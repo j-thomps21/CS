@@ -15,16 +15,14 @@ public class Caesar implements Encryptor
 
   /**
   */
-  public void init(char[] key)
+  public void init(char[] key) throws Throwable
   {
     shift = 0;
     int total = 18;
     for(int i = 0; i < key.length; i++)
     {
       if(key[i] < 42 || key[i] > 122)
-      {
-        throw new CharacterException("Character is outside of 42-122 ASCII range");
-      }
+        throw new Throwable("error " + key[i] + " not allowed in key");
 
       total += ((int)(key[i]) - 42);
     }
@@ -35,13 +33,16 @@ public class Caesar implements Encryptor
 
   /**
   */
-  public String encrypt(String plain)
+  public String encrypt(String plain) throws Throwable
   {
     int k, p, c, cc;
     k = shift - 42;
     char[] pt = plain.toCharArray();
     for(int i = 0; i < pt.length; i++)
     {
+      if(pt[i] < 42 || pt[i] > 122)
+       throw new Throwable("error " + pt[i] + " not allowed in plaintext");
+
       p = pt[i] -42;
       c = (p+k) % 81;
       cc = 42 + c;

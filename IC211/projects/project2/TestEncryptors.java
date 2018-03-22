@@ -1,7 +1,10 @@
 
 import java.util.*;
-
+/**
+*/
 public class TestEncryptors {
+  /**
+  */
   public static void main(String[] args) throws Throwable {
     // Create ArrayList of all supported encryptors
     ArrayList<Encryptor> E = new ArrayList<Encryptor>();
@@ -28,12 +31,15 @@ public class TestEncryptors {
     try {
     E.get(i).init(password);
     } catch (Throwable e) {
-
+      System.out.println("<Exception thrown out of main! Exact output not shown.>");
+      System.exit(1);
     }
     String ciphertext = null;
     try{
       ciphertext = E.get(i).encrypt(plaintext);
     } catch(Throwable e) {
+      System.out.println("<Exception thrown out of main! Exact output not shown.>");
+      System.exit(1);
       //will put error message here eventually
     }
     String hopefully = E.get(i).decrypt(ciphertext);

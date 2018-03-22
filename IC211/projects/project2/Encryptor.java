@@ -1,3 +1,5 @@
+/**
+*/
 public interface Encryptor {
   public String getAlgName();
   public void   init(char[] key) throws Throwable;
