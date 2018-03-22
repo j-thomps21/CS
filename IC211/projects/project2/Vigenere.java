@@ -1,16 +1,17 @@
 /**
 */
-public class Clear implements Encryptor {
+public class Caesar implements Encryptor
+{
   /**
   */
   public String getAlgName()
   {
-    return "clear";
+    return "caesar";
   }
 
   /**
   */
-  public void   init(char[] key)
+  public void init(char[] key)
   {
 
   }
@@ -26,6 +27,6 @@ public class Clear implements Encryptor {
   */
   public String decrypt(String cipher)
   {
-    return cipher;
+    return cypher;
   }
 }
