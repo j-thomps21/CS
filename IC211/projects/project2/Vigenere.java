@@ -1,12 +1,17 @@
 /**
+class Vigenere that implements the functions from Encryptor
+@author Thompson, Joshua - 206360
 */
 public class Vigenere implements Encryptor
 {
   /**
+  data field mainKey is a char array that is used for encryption.
   */
   private char[] mainKey;
 
   /**
+  Method that tels what implementation of the encyptor class it is.
+  @return "vigenere"
   */
   public String getAlgName()
   {
@@ -14,6 +19,9 @@ public class Vigenere implements Encryptor
   }
 
   /**
+  Method that initializes the vigenere type. Checks each character first to make sure it is
+  in the ASCII range. Then it simply sets the mainKey equal to the inputted key.
+  @param key Char array that is used as the mainKey in the encryption
   */
   public void init(char[] key) throws Throwable
   {
@@ -25,6 +33,11 @@ public class Vigenere implements Encryptor
   }
 
   /**
+  Encrypt method for caesar. Using the mainKey array, the method uses each character as its own shift
+  amount for the encryption. Basically a more complicated version of the caesar shift. Using the shift
+  the method encrypts the input string.
+  @param plain input String given by the user
+  @return the cipher version of the inputted plaintext
   */
   public String encrypt(String plain) throws Throwable
   {
@@ -48,6 +61,9 @@ public class Vigenere implements Encryptor
   }
 
   /**
+  Decrypt method that does the same thing as the encryption method, but in reverse.
+  @param cipher The String that was previously encrypted
+  @return the plaintext
   */
   public String decrypt(String cipher)
   {

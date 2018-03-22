@@ -1,12 +1,17 @@
 /**
+class Caesar that implements the functions from encryptor
+@author Thompson, Joshua - 206360
 */
 public class Caesar implements Encryptor
 {
   /**
+  data field shift which tells the encyption method the shift of the encyption
   */
   private int shift;
 
   /**
+  Method that tells what implementation of the encryptor class it is.
+  @return string "caesar"
   */
   public String getAlgName()
   {
@@ -14,6 +19,9 @@ public class Caesar implements Encryptor
   }
 
   /**
+  Method that initializes the Caesar type. Checks each character to make sure it is
+  in the ASCII range. Then does an algorithm to calculate the shift amount
+  @param key Char array that determines the shift amount
   */
   public void init(char[] key) throws Throwable
   {
@@ -32,6 +40,10 @@ public class Caesar implements Encryptor
   }
 
   /**
+  Encrypt method for caesar. Using the shift amount, does a calculation by shifting each character
+  in the plaintext. Then returns the shifted string.
+  @param String of plaintext inputted by the user. All charcters must be within 42-122 ASCII range
+  @return The encyrpted text
   */
   public String encrypt(String plain) throws Throwable
   {
@@ -53,6 +65,9 @@ public class Caesar implements Encryptor
   }
 
   /**
+  Decrypt method that does the same thing as the encyption method, but in reverse.
+  @param cipher The String that was previously encyrpted
+  @return The plaintext
   */
   public String decrypt(String cipher)
   {

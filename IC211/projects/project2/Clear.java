@@ -13,7 +13,10 @@ public class Clear implements Encryptor {
   }
 
   /**
-
+  Method that initializes the Clear type encryption. For Clear it doesnt do anything
+  but check to ensure that the password inputted contains characters that are in the
+  correct range.
+  @param key Char array that doesnt really do anything
   */
   public void   init(char[] key) throws Throwable
   {
@@ -25,6 +28,10 @@ public class Clear implements Encryptor {
   }
 
   /**
+  Encrpt method for Clear. doesnt do anything but return the input plaintext.
+  There is a check to ensure that the characters are all in the correct ASCII range
+  @param plain String of plaintext inputted by the user. All characters must be within 42-122 ASCII range
+  @return The encrypted text which in this case is the same as the plaintext
   */
   public String encrypt(String plain) throws Throwable
   {
@@ -38,6 +45,9 @@ public class Clear implements Encryptor {
   }
 
   /**
+  Decrypt method that simply returns the inputted string.
+  @param cipher String that was encrypted
+  @return the same string that was inputted
   */
   public String decrypt(String cipher)
   {

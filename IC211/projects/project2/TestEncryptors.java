@@ -1,9 +1,14 @@
 
 import java.util.*;
 /**
+TestEncryptors class that is used to test the various encryption types that we created.
+@author Thompson, Joshua - 206360
 */
 public class TestEncryptors {
   /**
+  Main method. Takes in the desired algorithm type that the user wants to use. Then takes in a password
+  and then the text they want to encrypt. Throws exceptions when the user inputs characters that are
+  outside of the required ASCII range. 
   */
   public static void main(String[] args) throws Throwable {
     // Create ArrayList of all supported encryptors
