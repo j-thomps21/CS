@@ -13,6 +13,8 @@ public class TestHashers {
     // Create ArrayList of all supported encryptors
     ArrayList<Hasher> E = new ArrayList<Hasher>();
     E.add(new ClearHash());
+    E.add(new EncHash('c'));
+    E.add(new EncHash('v'));
 
     // Get alg,psw,msg from user
     System.out.print("algorithm: ");
