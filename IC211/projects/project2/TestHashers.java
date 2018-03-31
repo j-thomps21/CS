@@ -21,16 +21,15 @@ public class TestHashers {
     String hashalg = System.console().readLine();
     System.out.print("password : ");
     char[] password = System.console().readPassword();
-    String pwd = new String(password);
-    System.out.println("password read : " + pwd);
-
-
     // Find index of encryptor (throw exception if not found)
     int i = -1;
     try
     {
       while(!E.get(++i).getHashName().equals(hashalg));
-    } catch(Exception e) { throw new Exception("Unknown algorithm '" + hashalg +"'."); }
+    } catch(Exception e) {
+      System.out.println("<Exception thrown out of main! Exact output not shown.>");
+      System.exit(1);
+    }
 
     // Encrypt, decrypt print sumamry of results
     try {
@@ -39,7 +38,11 @@ public class TestHashers {
       System.out.println("<Exception thrown out of main! Exact output not shown.>");
       System.exit(1);
     }
-    char[] hashText = new char[16];
+    String pwd = new String(password);
+    System.out.println("password read : " + pwd);
+
+
+        char[] hashText = new char[16];
     try{
       hashText = E.get(i).computeHash();
     } catch(Throwable e) {
