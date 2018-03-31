@@ -30,7 +30,7 @@ public class EncHash implements Hasher
 
   /**
   */
-  public void init(char[] p)
+  public void init(char[] p) throws Throwable
   {
     for(int i = 0; i < p.length; i++)
     {
