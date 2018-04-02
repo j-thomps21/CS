@@ -16,6 +16,14 @@ public class EncHash implements Hasher
     vector = t.toCharArray();
   }
 
+  public void reset()
+  {
+    String t = "GO_NAVY_2018^mid";
+    vector = t.toCharArray();
+    char[] p = new char[16];
+    pwd = p;
+  }
+
   /**
   */
   public String getHashName()
