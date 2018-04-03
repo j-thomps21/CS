@@ -3,6 +3,7 @@ public class UserData
   private String userName;
   private Hasher H;
   private char[] hashText;
+  
 
   public UserData(Hasher h, String ht, String un) throws Throwable
   {
@@ -39,6 +40,8 @@ public class UserData
 
     if(x.equals(y))
       check = true;
+    if(!uname.equals(userName))
+      check = false;
     System.out.print("Check is: "+ check);
     return check;
   }

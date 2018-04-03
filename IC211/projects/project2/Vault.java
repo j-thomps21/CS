@@ -17,22 +17,27 @@ public class Vault
         System.out.print("<Exception thrown out of main! Exact output not shown.>");
       }
     }
+
+
     ArrayList<UserData> users = new ArrayList<UserData>();
     try {
       users = readFile(args);
     } catch(Throwable e) {
-      System.out.print("<Exception thrown out of main! Exact output not shown.>");
+      System.out.println(e.getMessage());
+      System.exit(1);
     }
 
     System.out.print("username: ");
     String uname = System.console().readLine();
     System.out.print("password: ");
     char[] password = System.console().readPassword();
-    boolean check = true;
+    boolean check = true, checkName = false;
     for(int i = 0; i < users.size(); i++)
     {
       if(!uname.equals(users.get(i).getUserName()))
         continue;
+      else
+        checkName = true;
       try {
         if(users.get(i).authenticate(uname, password))
         {
@@ -49,6 +54,11 @@ public class Vault
           System.out.println("<Exception thrown out of main! Exact output not shown.>");
           System.exit(1);
       }
+    }
+    if(checkName == false)
+    {
+      System.out.println("Acess Denied!");
+      System.exit(1);
     }
     if(check == true)
       miniSH(users);
@@ -76,10 +86,14 @@ public class Vault
       int i = -1;
       String line = sc.nextLine();
       String[] cmd = line.split(" ");
+      if((cmd.length < 4) || (!(cmd[0].equals("user")) && !(cmd[0].equals("data"))))
+        throw new Throwable("Error! File '" + args[0] + "' improperly formatted.");
+
+      //boolean checkHash = false;
       try {
         while(!E.get(++i).getHashName().equals(cmd[2]));
       } catch (Exception e) {
-        System.out.println("<Exception thrown out of main! Exact output not shown.>");
+        System.out.println("Error! Hash algorithm '" + cmd[2] + "' not supported.");
         System.exit(1);
       }
       try {
@@ -110,11 +124,11 @@ public class Vault
 
   public static void addUser(String[] args) throws Throwable
   {
-    System.out.print("username");
+    System.out.print("username: ");
     String uname = System.console().readLine();
-    System.out.print("password");
+    System.out.print("password: ");
     char[] pwd = System.console().readPassword();
-    System.out.print("Hash algorithm");
+    System.out.print("Hash algorithm: ");
     String hashAlg = System.console().readLine();
 
     PrintWriter pw = null;
@@ -135,5 +149,6 @@ public class Vault
     H[i].init(pwd);
     pw.println(new String(H[i].computeHash()));
     if (pw != null) pw.close();
+    System.exit(0);
   }
 }
