@@ -1,0 +1,11 @@
+Key Points:
+
+  -> Floating point allows binary to describe real numbers, not just integers
+  -> Format:
+    -> Sign bit, exponent bits, fraction bit
+  ->  Double = double precision which doubles the amount of bits allocated to the number
+  -> IEEE 74 is the floating point standard
+  -> Its fairly simple to convert from floating point binary to decimal
+
+Confusing:
+  -> Floating point multiplication

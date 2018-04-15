@@ -1,0 +1,202 @@
+\documentclass{article}[9pt]
+
+\usepackage{listings}
+\usepackage{fullpage}
+\usepackage{textcomp}
+\usepackage{mdframed}
+
+\lstset{ %
+  basicstyle=\ttfamily\scriptsize,
+  commentstyle=\ttfamily\scriptsize\emph,
+  upquote=true,
+  framerule=1.25pt,
+  breaklines=true,
+  showstringspaces=false,
+  escapeinside={(*@}{@*)},
+  belowskip=2em,
+  aboveskip=1em,
+}
+
+
+\newenvironment{answerfont}{\fontfamily{qhv}\selectfont}{\par}
+\newenvironment{myanswer}{\begin{mdframed}\begin{answerfont}}{\end{answerfont}\end{mdframed}}
+
+
+\title{HW 11}
+
+\author{Joshua Thompson}
+
+\date{April 14, 2018}
+
+\begin{document}
+
+\maketitle
+\section*{Questions}
+\label{sec:org3ac93b9}
+
+\begin{enumerate}
+\item (5 points) What are the two parts of a packet? Which stores the address and what stores the data?
+
+\begin{myanswer}
+The header which stores the address and the payload which stores the data
+\end{myanswer}
+
+
+\item (5 points) What does it mean for the Internet to be "packet switched"?
+
+  \begin{myanswer}
+  It means that when the packet arrives at routers or switches, based solely on the header, the device knows where to send the packet.
+  \end{myanswer}
+
+\item (5 points) What are the different layers of the protocol stack and what purpose do they serve in delivering a packet?
+
+
+  \begin{myanswer}
+  The layers are the Physical, link, Internet, Transport, and Application layers. The physical layer's purpose is to send signals accross a wire. The Link adds protocols for how the medium (a wire) shares signals across many devices. The Internet and
+  transport layers interact with the protocols from the Link layer. Internet purpose is to inter-connect networks via the internet protocol address aka ip address. The transport layer allows two computers across the internet to act as if they were talking
+  directly to each other. The application layer can add further protocols based on the functionality of the application itself.
+  \end{myanswer}
+
+\item (5 points) An Internet address (version 4) is stored in how many bytes?
+
+  \begin{myanswer}
+  4 bytes.
+  \end{myanswer}
+
+
+\item (5 points) A domain name, unlike an IP address, is more human usable, what protocol enables domain names to be resolved into IP addresses?
+
+    \begin{myanswer}
+    DNS
+    \end{myanswer}
+
+
+\item (15 points) Using the host command line tool, resolve the following domain names to an IPv4 address. Indicate those that also have IPv6 addresses, and also, rerun host a few times,
+ indicate which hosts IP addresses changed on subsequent runs.
+
+  \begin{enumerate}
+  \item \texttt{www.cis.upenn.edu}
+    \begin{myanswer}
+    IPv4: 158.130.69.163\n
+    IPv6: 2607:f470:8:64:5ea5::d
+    \end{myanswer}
+
+  \item \texttt{www.cs.swarthmore.edu}
+    \begin{myanswer}
+    IPv4: 130.58.68.137
+    \end{myanswer}
+
+  \item \texttt{www.usna.edu}
+    \begin{myanswer}
+    IPv4: 10.4.36.20
+    \end{myanswer}
+
+  \item \texttt{facebook.com}
+    \begin{myanswer}
+    IPv4: 31.13.69.228\n
+    IPv6: 2a03:2880:f103:83:face:b00c:0:25de
+    \end{myanswer}
+
+  \item \texttt{microsoft.com}
+    \begin{myanswer}
+    IPv4: 104.43.195.251\n
+    IPv4: 23.100.122.175\n
+    IPv4: 23.96.52.53\n
+    IPv4: 191.239.213.197\n
+    IPv4: 104.40.211.35\n
+    Microsoft changes IP addresses when running host multiple times.
+    \end{myanswer}
+
+  \end{enumerate}
+
+\item (10 points) What is the purpose of the port address? How many bytes and what C type would naturally store a port address?
+
+  \begin{myanswer}
+  ***It is used to deliver the incoming message throughout the computer. Ports are heavily connected to applications.****
+  \end{myanswer}
+
+\item (10 points) TCP provides reliable data transmission, but at what cost? Why might you want to use UDP over TCP?
+
+  \begin{myanswer}
+  The cost is that in order for the protocol to be reliable, there must be confirmation of recieving packets, and retransmission of lost packets. Therefore, there is a lot
+  of overhead while using this protocol. One might want to use UDP instead of TCP if they don't mind losing some packets here and there. An example is audio streaming.
+  \end{myanswer}
+
+\item (20 points) For each of the descriptions below of a network type, indicate the type that best matches that description.
+
+  \item \texttt{Specifies the address type, eg AF_INET, for the addrinfo structure}
+    \begin{myanswer}\begin{vetbatim}
+    ai_family
+    \end{verbatim}\end{myanswer}
+
+  \item \texttt{Specifies the address type for sockaddr structure}
+    \begin{myanswer}\begin{vetbatim}
+    
+    \end{verbatim}\end{myanswer}
+
+  \item \texttt{A type defined as a uint32}
+    \begin{myanswer}\begin{vetbatim}
+    \end{verbatim}\end{myanswer}
+
+  \item \texttt{A generic address structure for sockets}
+    \begin{myanswer}\begin{vetbatim}
+    \end{verbatim}\end{myanswer}
+
+  \item \texttt{A structure to store an IPv4 internet address}
+    \begin{myanswer}\begin{vetbatim}
+    \end{verbatim}\end{myanswer}
+
+  \item \texttt{An unsigned short storing the port for a sockaddr_in}
+    \begin{myanswer}\begin{vetbatim}
+    \end{verbatim}\end{myanswer}
+
+  \item \texttt{Structure used to hint at IP addresses for resolving as well as storing results}
+    \begin{myanswer}\begin{vetbatim}
+    \end{verbatim}\end{myanswer}
+
+  \item \texttt{Member of the sockaddr_in that stores the address}
+    \begin{myanswer}\begin{vetbatim}
+    \end{verbatim}\end{myanswer}
+
+  \item \texttt{The sole member of the in_addr structure}
+    \begin{myanswer}\begin{vetbatim}
+    \end{verbatim}\end{myanswer}
+
+  \item \texttt{A generic socket address returned in addrinfo}
+    \begin{myanswer}\begin{vetbatim}
+    \end{verbatim}\end{myanswer}
+
+  \item \texttt{A specific address structure for sockets to store IP, port pairs}
+    \begin{myanswer}\begin{vetbatim}
+    \end{verbatim}\end{myanswer}
+
+\item (5 points) The following functions are opposites, inet_ntoa() and inet_aton(), what are their purposes? Give example.
+
+  \begin{myanswer}
+  \end{myanswer}
+
+\item (5 points) When assign a port to a socket address, which of these two conversion should you use and why? htnos() vs nths().
+
+  \begin{myanswer}
+  We can bound check the command string to make sure that it is withing the right size.
+  \end{myanswer}
+
+\item (10 points) Consider setting the adress 10.4.32.41 on port 22. Complete the code below to do that.
+
+\begin{enumerate}
+\begin{verbatim}
+struct sockaddr_in saddr;
+//TODO: what assignments come next
+\end{verbatim}
+\end{enumerate}
+
+\begin{myanswer}
+\begin{verbatim}
+struct: sockaddr_in saddr;
+
+\end{verbatim}
+\end{myanswer}
+
+
+\end{enumerate}
+\end{document}

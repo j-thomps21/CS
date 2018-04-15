@@ -1,0 +1,356 @@
+\documentclass{article}[9pt]
+
+\usepackage{listings}
+\usepackage{fullpage}
+\usepackage{textcomp}
+\usepackage{mdframed}
+
+\lstset{ %
+  basicstyle=\ttfamily\scriptsize,
+  commentstyle=\ttfamily\scriptsize\emph,
+  upquote=true,
+  framerule=1.25pt,
+  breaklines=true,
+  showstringspaces=false,
+  escapeinside={(*@}{@*)},
+  belowskip=2em,
+  aboveskip=1em,
+}
+
+
+\newenvironment{answerfont}{\fontfamily{qhv}\selectfont}{\par}
+\newenvironment{myanswer}{\begin{mdframed}\begin{answerfont}}{\end{answerfont}\end{mdframed}}
+
+
+\title{HW 8}
+
+\author{Joshua Thompson}
+
+\date{March 17, 2018}
+
+\begin{document}
+
+\maketitle
+\section*{Questions}
+\label{sec:org3ac93b9}
+
+\begin{enumerate}
+\item (3 points) What is a zombie and how are they created? AND, why are zombie
+process a bad thing? (process zombies not human zombies)
+
+  \begin{myanswer}
+  when a child process is not waited on by the parent. It still shows on the process table. They are bad because enough of them can clog up the process table. 
+  \end{myanswer}
+
+
+\item (3 points) What is an orphan process? How are they created and who "adopts"
+all orphans?
+
+  \begin{myanswer}
+  An orphan process is a process in which the parent dies before the child does. The init
+  process inherits the child and waits until the child process is complete.
+  \end{myanswer}
+
+\item (5 points) How are process groups and jobs related in the shell?
+
+  \begin{myanswer}
+  Because some jobs require more than one process to complete, the multiple processes are grouped
+  together into a process group.
+  \end{myanswer}
+
+\item (4 points) How long with the following shell command  run for and why?
+
+\begin{verbatim}
+sleep 10 | sleep 20 | sleep 100 | sleep 30 | sleep 1
+\end{verbatim}
+
+  \begin{myanswer}
+  The command will run for 100 seconds then stop. This is because all the commands are run in
+  parallel. Since they don't rely on any information from the previous command, they all just run
+  at the same time.
+  \end{myanswer}
+
+\item (5 points) Explain the difference between sequential and parallel execution
+of a command line?
+
+  \begin{myanswer}
+  The difference is that in sequential execution, the process will always wait for the previous one to finish
+  before it begins executing. In the above question that would mean that the time to complete the command
+  would be all the sleep commands added up together. For parallel execution, all the processes are run at once,
+  so instead of waiting for the last command to finish, it begins completing the command while the other is also running.
+  \end{myanswer}
+
+\item (8 points) For each of the system calls associated with process groupings,
+provide a brief explanation of each.
+
+\begin{enumerate}
+\item \texttt{setpgrp()}
+
+  \begin{myanswer}
+  Sets the process group to the same as itself. (pid)
+  \end{myanswer}
+
+\item \texttt{setpgid()}
+
+  \begin{myanswer}
+  Sets the identified process in the first argument to itself. If first arg is 0 then sets
+  the process group to pgid.
+  \end{myanswer}
+
+\item \texttt{getpgrp()}
+
+  \begin{myanswer}
+  Gets the process group id of calling process
+  \end{myanswer}
+
+\item \texttt{getpgid()}
+
+  \begin{myanswer}
+  Gets the process group id for process identified in first arg
+  \end{myanswer}
+
+\end{enumerate}
+
+\item (10 points) For each of the system calls with arguments, briefly describe the
+resulting action with respect to the calling process or target
+process.
+
+\begin{enumerate}
+\item \texttt{getpgid(0)}
+
+  \begin{myanswer}
+  Would get the process group id for stdin
+  \end{myanswer}
+
+\item \texttt{setpgid(0,0)}
+
+  \begin{myanswer}
+  sets the current processes pgid to its own pid
+  \end{myanswer}
+
+\item \texttt{setpgid(0,pgid)}
+
+  \begin{myanswer}
+  sets the current processes pgid to the one specified in the second argument
+  \end{myanswer}
+
+\item \texttt{setpgid(pid, 0)}
+
+  \begin{myanswer}
+  Sets the pgid of the process specified in the first argument to the caller's pgid
+  \end{myanswer}
+
+\end{enumerate}
+
+\item (10 points) Consider the following code snippet, what is the output and why?
+(\emph{Hint: why not run it?})
+
+\begin{verbatim}
+int main(){
+  pid_t cpid;
+
+  cpid = fork();
+  if(cpid == 0){
+
+    setpgrp();
+    if( getpid() == getpgrp()){
+      printf("C: SAME PGID\n");
+    }
+    exit(0);
+
+  }else if(cpid > 0){
+
+    if(getpgid(cpid) == cpid){
+      printf("P: SAME PGID\n");
+    }else{
+      printf("P: NOT SAME PGID\n");
+    }
+
+    wait();
+    exit(0);
+  }
+
+  exit(1);
+}
+\end{verbatim}
+
+  \begin{myanswer}
+  output:
+  P: NOT SAME PGID
+  C: SAME PGID
+
+  \end{myanswer}
+
+
+\item (12 point) Consider the following code snippet. If we were to run this
+program in a terminal, will it be properly terminated by Ctrl-c?
+If so, why? If not, why not?
+
+\begin{verbatim}
+int main(){
+  pid_t cpid;
+
+  cpid = fork();
+  if( cpid == 0 ){
+    setpgrp();
+    while(1);
+  }else if( cpid > 0 ){
+    wait(NULL);
+    exit(0);
+  }
+  exit(1); //fork failed
+}
+\end{verbatim}
+
+  \begin{myanswer}
+  ctrl+c does not terminate the process because the process group id of the child is changed from the parent group id.
+  \end{myanswer}
+
+
+\item (12 point) Consider the following code snippet with the open file
+\texttt{fight.txt} containing the text " Go Navy! Beat Army!" (yes,
+there are spaces in there).  What is the output of this program,
+and why?
+
+\begin{verbatim}
+int main(){
+  pid_t cpid;
+
+  int fd = open("fight.txt",O_RDONLY);
+  char buf[1024];
+
+  cpid = fork();
+  if( cpid == 0 ){
+    read(fd, buf, 10);
+    exit(0);
+  }else if( cpid > 0 ){
+    wait(NULL); /* wait for child*/
+
+    read(fd,buf, 10);
+    write(1, buf, 10);
+    exit(0);
+  }
+  exit(1); //fork failed
+}
+\end{verbatim}
+
+  \begin{myanswer}
+  Output is "Beat Army!". Child reads 10 bytes from the file, then parent reads next 10 and writes to stdout
+  \end{myanswer}
+
+
+\item (4 points) What does it mean to "widow" a pipe?
+
+  \begin{myanswer}
+  closes the end of the pipe
+  \end{myanswer}
+
+
+\item (12 points) Consider the following code snippet with the open file
+\texttt{fight.txt} containing the text " Go Navy! Beat Army!" (yes,
+there are spaces in there).  What is the output of this program,
+and why?
+
+\begin{verbatim}
+int main(){
+  int fd_in = open("fight.txt",O_RDONLY);
+
+  int fd_out = open("output.txt",O_WRONLY | O_TRUNC | O_CREAT,0755);
+  char buf[1024];
+
+  close(0);
+  dup2(fd_in,0);
+
+  close(1);
+  dup2(fd_out,1);
+
+  while(scanf("%s",buf) != EOF){
+    printf("%s\n",buf);
+  }
+
+  return 0;
+}
+\end{verbatim}
+
+  \begin{myanswer}
+  When the close(1) happens, an eof is hit and the while loop is never begun.
+  \end{myanswer}
+
+
+\item (12 points) What is the missing code in the program below such that the
+child's write to \texttt{stdout} will be ready by the parent through
+its \texttt{stdin}?
+
+\begin{verbatim}
+int main(){
+  pid_t cpid;
+  int pfd[2], n;
+  char gonavy[] = "Go Navy!";
+  char buffer[1024];
+
+  pipe(pfd);
+
+  cpid = fork();
+  if( cpid == 0 ){
+
+    /* What goes here? */
+
+    write(1, gonavy,strlen(gonavy));
+  }else if( cpid > 0 ){
+
+    /* What goes here? */
+
+
+    n = read(0, buffer, 1024);
+    write(1,buffer,n);
+  }
+
+  exit(1);
+}
+\end{verbatim}
+
+  \begin{myanswer}
+  \begin{lstlisting}[language=c]
+  #include <stdio.h>
+  #include <unistd.h>
+  #include <stdlib.h>
+  #include <sys/syscall.h>
+  #include <sys/wait.h>
+  #include <string.h>
+
+  int main(){
+    pid_t cpid;
+    int pfd[2], n;
+    char gonavy[] = "Go Navy!";
+    char buffer[1024];
+
+    pipe(pfd);
+
+    cpid = fork();
+    if( cpid == 0 )
+    {
+      close(1);
+      dup2(pfd[1], 1);
+      close(pfd[0]);
+
+      write(1, gonavy,strlen(gonavy));
+    }
+    else if( cpid > 0 )
+    {
+      close(0);
+      dup2(pfd[0], 0);
+      close(pfd[1]);
+
+
+      n = read(0, buffer, 1024);
+      write(1,buffer,n);
+    }
+
+    exit(1);
+  }
+  \end{lstlisting}
+  \end{myanswer}
+
+
+\end{enumerate}
+\end{document}

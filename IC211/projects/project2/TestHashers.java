@@ -27,7 +27,7 @@ public class TestHashers {
     {
       while(!E.get(++i).getHashName().equals(hashalg));
     } catch(Exception e) {
-      System.out.println("<Exception thrown out of main! Exact output not shown.>");
+      System.out.println("Error! Hash algorithm '" + hashalg + "' not supported.");
       System.exit(1);
     }
 
@@ -35,7 +35,7 @@ public class TestHashers {
     try {
     E.get(i).init(password);
     } catch (Throwable e) {
-      System.out.println("<Exception thrown out of main! Exact output not shown.>");
+      System.out.println(e.getMessage());
       System.exit(1);
     }
     String pwd = new String(password);
@@ -46,9 +46,8 @@ public class TestHashers {
     try{
       hashText = E.get(i).computeHash();
     } catch(Throwable e) {
-      System.out.println("<Exception thrown out of main! Exact output not shown.>");
+      System.out.println(e.getMessage());
       System.exit(1);
-      //will put error message here eventually
     }
     String h = new String(hashText);
     System.out.println("hash computed : " + h);

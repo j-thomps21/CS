@@ -1,0 +1,38 @@
+Key Points:
+
+  4.1:
+    ->  The Program Counter (PC) register contains the instructions
+    ->  Reading one or two registers
+    ->  Everything is done through the ALU (except for jump)
+      ->  mux also plays an important role
+    ->  for every instruction the PC is incremented by 4
+
+  4.2:
+    ->  Elements that operate on data values are combinational logic
+      -> ALU
+    ->  Other kind is state logic
+      -> registers
+      -> at least two inputs and one output
+    ->  Different kinds of clocking methodology
+      -> edge-triggered methodology
+        ->  values updated only on the clock edge
+    ->  control signals are used
+
+  4.3:
+    -> datapath elements
+      ->  program counter (PC)
+      ->  adder which increments the PC (used through ALU just adds 4)
+      ->  must fetch instruction from the memory
+    ->  R-type instructions are common
+      -> take two registers, perform an operation and put result in another register
+    ->  things stored in the register file
+
+  4.4:
+    ->  tell the ALU what instruction is it based on the 4 bit input
+    ->  use a separate control unit to tell the ALU what to do
+
+
+
+Confusing Things:
+
+->  sign extend?

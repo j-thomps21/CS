@@ -1,0 +1,48 @@
+Key Points: 
+
+  5.7:
+   Key Points:
+    -> Virtual memory was created to lighten the workload on programmers from tasks like
+       breaking up programs 
+    -> Virtual memory doesn't allocate programs to one big block of memory. Scattered around
+    -> Uses pages
+      -> page table used to index memory 
+      -> every program has its own page table
+      -> page faults are bad and costly 
+      -> objective is to reduce the amount of page faults 
+    -> place where all the pages go is called the swap space
+    -> Techniques used to reduce amount of storage for the page table
+      -> 1. keep a limit register that restricts table size
+      -> 2. make two separate one dimensional page tables 
+      -> 3. use a hashing function to make the page table the exact right size, but complicates the indexes
+      -> 4. use multiple levels of page storage to reduce the total size
+      -> 5. Page the page tables... interesting
+    -> TLB (translation-lookaside buffer) makes addres translation fast its a cache
+      -> Intrinsity FASTMATH TLB
+   Confusing Points:
+    -> writing
+
+  5.8: 
+   Key Points:
+    -> There are similarities between memory hierarchies
+    -> increasing associativity usually decreases the miss rate
+    -> blocks are found through addresses
+    -> how to replace blocks? Either random or LRU
+    -> Writing? =  write-through or write-back
+    -> 3 c's
+      -> Compulsory miss
+      -> Capacity miss
+      -> Conflict miss aka collision miss
+   
+  5.15 & 5.16:
+    Key points:
+    -> Programmers should keep memory hierarchies in mind when they write their code
+      ->  They can double their performance if they factor memory into algorithms
+    -> Need associativity 
+    -> cant use unsegmented address space for program 
+
+    Confusing:
+    -> need to account for byte addressing or block size?
+    -> using average memory access time to evaluate memory hierarchy of out-of-order processor?
+
+

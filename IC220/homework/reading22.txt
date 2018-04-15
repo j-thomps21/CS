@@ -1,0 +1,8 @@
+Key Points:
+-> ALU is an arithmetic logical unit that handles the arithmetic functions
+  -> Can do AND, OR, NOR, add, suubtract, set on less than
+-> input is a 4 bit signal that goes into the controller which then decides what happens in the ALU main
+-> splitting things up can help increase execution time
+
+
+

@@ -1,0 +1,288 @@
+\documentclass{article}[9pt]
+
+\usepackage{listings}
+\usepackage{fullpage}
+\usepackage{textcomp}
+\usepackage{mdframed}
+
+\lstset{ %
+  basicstyle=\ttfamily\scriptsize,
+  commentstyle=\ttfamily\scriptsize\emph,
+  upquote=true,
+  framerule=1.25pt,
+  breaklines=true,
+  showstringspaces=false,
+  escapeinside={(*@}{@*)},
+  belowskip=2em,
+  aboveskip=1em,
+}
+
+
+\newenvironment{answerfont}{\fontfamily{qhv}\selectfont}{\par}
+\newenvironment{myanswer}{\begin{mdframed}\begin{answerfont}}{\end{answerfont}\end{mdframed}}
+
+
+\title{HW 7}
+
+\author{Joshua Thompson}
+
+\date{4 March 2017}
+
+\begin{document}
+
+\maketitle
+
+\section*{Questions}
+\label{sec:orgfce6862}
+
+\begin{enumerate}
+\item (10 points) What is the difference between \texttt{\_exit()} and \texttt{exit()} and \texttt{\_Exit()}?
+
+  \begin{myanswer}
+  \begin{verbatim}
+    _exit() is a system call while the others are library calls
+  \end{verbatim}
+  \end{myanswer}
+
+\item (5 points) When a process successfully returns from \texttt{main()}, which of the
+three different exit calls is actually used? What exit value is
+typically used for the process when it returns from \texttt{main()} and
+why?
+
+  \begin{myanswer}
+    The program typically uses the exit() function and returns with the value 0. Which shows that the program ran without any errors.
+  \end{myanswer}
+
+\item (5 points) What is the difference between unbuffered, line buffered, and
+fully buffered with respect to output streams?
+
+  \begin{myanswer}
+    The difference is when the information is released, whether it be input information or output. For unbuffered information it is released immediately which is good for error messages. For line buffered, the information is released when a newline character is read. For fully buffered, the information is released when the buffer size is filled.
+  \end{myanswer}
+
+\item (20 points) Consider the following program snippets. What are the outputs of
+each? \textbf{Explain your answer!}
+
+\begin{enumerate}
+\item
+\begin{verbatim}
+int main(){
+  fprintf(stdout, "Hello World!");
+  return 0;
+}
+\end{verbatim}
+
+  \begin{myanswer}
+    "Hello World" is the output
+  \end{myanswer}
+
+\item
+\begin{verbatim}
+int main(){
+  fprintf(stdout, "Hello World!");
+  exit(0);
+}
+\end{verbatim}
+
+    \begin{myanswer}
+      "Hello World" is the output
+  \end{myanswer}
+
+\item
+\begin{verbatim}
+int main(){
+  fprintf(stdout, "Hello World!");
+  _Exit(0);
+}
+\end{verbatim}
+
+  \begin{myanswer}
+    There is no output
+  \end{myanswer}
+
+\item
+\begin{verbatim}
+int main(){
+  fprintf(stderr, "Hello World!");
+  _exit(0);
+}
+\end{verbatim}
+
+  \begin{myanswer}
+    there is no output
+  \end{myanswer}
+
+\end{enumerate}
+
+\item (10 point) Why does the following code snippet properly check for a failed
+call to \texttt{execv()}?
+
+\begin{verbatim}
+int main(){
+  char * ls_args[2] = { "/bin/ls", NULL} ;
+
+  execv( ls_args[0], ls_args);
+  perror("execve failed");
+
+  exit(1); //failure
+}
+\end{verbatim}
+
+  \begin{myanswer}
+    It checks correctly because of the perror and the exit(1). They are only called when the execv fails
+  \end{myanswer}
+
+\item (10 points) Consider setting up an \texttt{argv} array to be passed to execv() for
+the execution of following command:
+
+\begin{verbatim}
+ls –l –a /bin /usr/bin Fill in
+\end{verbatim}
+
+Complete the \texttt{argv} deceleration in code
+
+\begin{verbatim}
+char * argv[] = { /* what goes here? */ } ;
+\end{verbatim}
+
+  \begin{myanswer}
+    "/bin/ls", "-l", "-a","/bin","/usr/bin",NULL;
+  \end{myanswer}
+
+\item (5 points) The \texttt{fork()} system call is the only function that returns
+\emph{twice}. Explain why this is?
+
+  \begin{myanswer}
+    This is because it runs two instances of the program where the function is called. In order to end the two programs, it must return from each of them.
+  \end{myanswer}
+
+\item (5 points) If you were to compile and run the following program in the
+shell, which process'es \texttt{pid} would print to the screen?
+\textbf{Explain}
+
+\begin{verbatim}
+int main(){
+  printf("Parent pid: %d\n", getppid());
+}
+\end{verbatim}
+
+  \begin{myanswer}
+    The pid of the bash shell would be returned because that is the parent pid of the program's pid.
+  \end{myanswer}
+
+
+\item (5 points) The \texttt{wait()} system call will return when a child's status change
+of a child. What is the most typical status change that would
+make the system call return?
+
+  \begin{myanswer}
+    The termination of the process
+  \end{myanswer}
+
+\item (15 points) Using the manual page, provide a brief description of each of
+the status macros below:
+
+
+\begin{enumerate}
+\item \texttt{WIFEXITED()}
+
+    \begin{myanswer}
+    The function returns true if the child process terminates normally.
+  \end{myanswer}
+
+\item \texttt{WIFEXITSTATUS()}
+
+    \begin{myanswer}
+    Returns the exit status of the child which consists of the 8 least significant digits of the status.
+  \end{myanswer}
+
+\item \texttt{WIFSIGNALED()}
+
+    \begin{myanswer}
+    write your answer here
+  \end{myanswer}
+
+\end{enumerate}
+
+\item (10 points) Assume you were writing a program that checked if a file
+existed by using \texttt{ls}. (This is a silly way to do this, but just
+for the sake of argument)
+
+Recall that \texttt{ls} returns an exit status of 2 when the file does
+not exist and it cannot list it, and \texttt{ls} returns an exit status
+of 0 when the file does exist and can be listed. Complete the
+\texttt{wait()} portion of the program below. The output should be
+EXISTS! if the file specified in \texttt{argv[1]} exists and DOES NOT
+EXIST! If the file specified in \texttt{argv[1]} does not exist.
+
+( \emph{hint: actually try and complete the program on your computer} )
+
+\begin{verbatim}
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <sys/wait.h>
+#include <sys/types.h>
+
+int main(int argc, char * argv[]){
+  pid_t cid;
+  char * ls_args[] = {"ls", NULL, NULL};
+  if(argc == 2){
+    ls_args[1] = argv[1];
+  }
+  cid = fork();
+  if( cid == 0 ){ /*child*/
+    execvp(ls_args[0],ls_args);
+    exit(1); /*error*/
+  }
+
+  /*parent*/
+  int status;
+  wait(&status);
+
+  /* FINISH THIS PROGRA */
+
+}
+\end{verbatim}
+
+  \begin{myanswer}
+  \begin{lstlisting}[language=c]
+  #include <unistd.h>
+  #include <stdio.h>
+  #include <stdlib.h>
+  #include <sys/types.h>
+  #include <sys/wait.h>
+
+  int main(int argc, char *argv[])
+  {
+    pid_t cid;
+    char * ls_args[] = {"/bin/ls", NULL, NULL};
+    if(argc == 2)
+      ls_args[1] = argv[1];
+    cid = fork();
+
+    if( cid == 0)
+    {
+      execv(ls_args[0], ls_args);
+    }
+    else if(cid > 0)
+    {
+      int status, t;
+      t = wait(&status);
+
+      if(WEXITSTATUS(status) == 0)
+        printf("EXISTS!\n");
+      else if(WEXITSTATUS(status) == 2)
+        printf("DOES NOT EXIST!\n");
+    }
+    return 0;
+  }
+  \end{lstlisting}
+  \end{myanswer}
+
+\end{enumerate}
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

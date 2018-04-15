@@ -1,0 +1,2 @@
+g++ main.cpp playermove.cpp Pos.cpp readboard.cpp part3.cpp part4.cpp -l ncurses
+Joshua Thompson alpha: 206360 Game goes up to part 4

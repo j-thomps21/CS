@@ -1,13 +1,23 @@
 import java.lang.*;
 /**
+Class EncHash that implements Hasher to create another Hashing type. In this case
+it actually creates two different hashing types based on what the user inputs into
+the constructor. Used to create either shift+vigenere or shift+caesar
+@author Thompson, Joshua - 206360
 */
 public class EncHash implements Hasher
 {
+  //The vector that is used for all hashing in this project
   private char[] vector;
+  //The inputted password
   private char[] pwd;
+  //Character that denotes the type of hashing wanted either c or v
   private char type;
 
   /**
+  Constructor for EncHash. Only 'v' or 'c' can be inputted which denote either
+  shift+caesar or shift+vigenere
+  @param c Character that denotes which hashing is desired
   */
   public EncHash(char c)
   {
@@ -16,6 +26,9 @@ public class EncHash implements Hasher
     vector = t.toCharArray();
   }
 
+  /**
+  Resets all the datafields
+  */
   public void reset()
   {
     String t = "GO_NAVY_2018^mid";
@@ -25,6 +38,8 @@ public class EncHash implements Hasher
   }
 
   /**
+  Returns the hash name. Depends on the type datafield
+  @return The name of the hash
   */
   public String getHashName()
   {
@@ -37,6 +52,10 @@ public class EncHash implements Hasher
   }
 
   /**
+  Method that initializes the EncHash object. Takes in a password and checks if
+  all the characters are within the correct ASCII range.
+  @param p Inputted password
+  @throws Throwable If the password is out of ASCII range
   */
   public void init(char[] p) throws Throwable
   {
@@ -49,6 +68,11 @@ public class EncHash implements Hasher
   }
 
   /**
+  Method used to compute the actual hash. Creates a for loop for the length of
+  the initialization vector and performs a computation. Encrypts the string and
+  shifts for every character of the vector.
+  @throws Throwable If something goes wrong in the Encryption methods.
+  @return The newly hashed vector
   */
   public char[] computeHash() throws Throwable
   {
@@ -75,6 +99,10 @@ public class EncHash implements Hasher
     return vector;
   }
 
+  /**
+  Method used to shift the string by k amount
+  @param k Integer that denotes how much the string must be shifted by
+  */
   public void shiftString(int k)
   {
     char[] temp = new char[16];

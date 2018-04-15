@@ -1,0 +1,236 @@
+\documentclass{article}[9pt]
+
+\usepackage{listings}
+\usepackage{fullpage}
+\usepackage{textcomp}
+\usepackage{mdframed}
+
+\lstset{ %
+  basicstyle=\ttfamily\scriptsize,
+  commentstyle=\ttfamily\scriptsize\emph,
+  upquote=true,
+  framerule=1.25pt,
+  breaklines=true,
+  showstringspaces=false,
+  escapeinside={(*@}{@*)},
+  belowskip=2em,
+  aboveskip=1em,
+}
+
+
+\newenvironment{answerfont}{\fontfamily{qhv}\selectfont}{\par}
+\newenvironment{myanswer}{\begin{mdframed}\begin{answerfont}}{\end{answerfont}\end{mdframed}}
+
+
+\title{HW 10}
+
+\author{Joshua Thompson}
+
+\date{April 8, 2018}
+
+\begin{document}
+
+\maketitle
+\section*{Questions}
+\label{sec:org3ac93b9}
+
+\begin{enumerate}
+\item (5 points) Why must there be a de-escelation of privilege when the login program executes the shell for an authenticated user?
+
+\begin{myanswer}
+So that the authenticated users doesn't get root priveleges
+\end{myanswer}
+
+
+\item (10 points) Consider the following program with the following permission strings below, if you (as your username) were to run these, programs, hat capabilites (group and user permissions) would the executing program have?
+
+\begin{enumerate}
+\item \texttt{-rwxr-x--x 1 aviv scs 8622 Mar 30 10:40 a.out}
+
+  \begin{myanswer}
+  The user running the program only gets the permission they have
+  \end{myanswer}
+
+
+\item \texttt{-rwsr-x--x 1 aviv scs 8622 Mar 30 10:40 a.out}
+
+  \begin{myanswer}
+  The user running the program gets the setbit for user execution but retains the real id for group execution
+  \end{myanswer}
+
+\item \texttt{-rwxr-s--x 1 aviv scs 8622 Mar 30 10:40 a.out}
+
+  \begin{myanswer}
+  The user running the program has the real id for user execution but has set bit for group execution
+  \end{myanswer}
+
+\item \texttt{-rwsr-s--x 1 aviv scs 8622 Mar 30 10:40 a.out}
+
+  \begin{myanswer}
+  The user running the program has setbit for both user and group execution
+  \end{myanswer}
+\end{enumerate}
+
+\item (5 points) What is the difference between the real and effective user and group id of a running process?
+
+
+  \begin{myanswer}
+  A user's real id is unique and has their own permissions but when running a program, the effective user id is who ever's id it was that made the progam.
+  When one runs the program they take the id of the owner and assume their permissions.
+  \end{myanswer}
+
+\item (15 points) Provide a short, Plain english description of each of the system calls below.
+
+\begin{enumerate}
+\item \texttt{getuid()}
+
+  \begin{myanswer}
+  Returns the real user id of the calling process
+  \end{myanswer}
+
+
+\item \texttt{getgid()}
+
+  \begin{myanswer}
+  Returns the real group id of the calling process
+  \end{myanswer}
+
+\item \texttt{geteuid()}
+
+  \begin{myanswer}
+  return the effective user id for the calling process
+  \end{myanswer}
+
+\item \texttt{getegid()}
+
+  \begin{myanswer}
+  return the effective group id for the calling process
+  \end{myanswer}
+
+\item \texttt{setuid(uid)}
+
+  \begin{myanswer}
+  change the effictive user id of a process to uid given in the parameter
+  \end{myanswer}
+
+
+\item \texttt{setgid(uid)}
+
+  \begin{myanswer}
+  change the effective group id of a process to gid given in the parameter
+  \end{myanswer}
+
+\item \texttt{setreuid(uid, euid)}
+
+  \begin{myanswer}
+  Sets the real user id and the effective user id
+  \end{myanswer}
+
+
+\item \texttt{setregid(gid, egid)}
+
+  \begin{myanswer}
+  Sets the real group id and the effective group id
+  \end{myanswer}
+
+\end{enumerate}
+
+\item (10 points) Consider the following chmod statements, provide the permission string, that is the permission string rwxrwxrwx represents 777. Be careful about setbits
+
+  \begin{enumerate}
+  \item \texttt{chmod 6750 a.out}
+
+    \begin{myanswer}
+    rwsr-s---
+    \end{myanswer}
+
+  \item \texttt{(chmod 4750 a.out}
+
+    \begin{myanswer}
+    rwsr-x---
+    \end{myanswer}
+
+  \item \texttt{(chmod 2750 a.out}
+
+    \begin{myanswer}
+    rwxr-s---
+    \end{myanswer}
+
+  \end{enumerate}
+
+\item (5 points) Supposed you are writing a setuid program, and you want downgrade the effective permission of the program back to the user who is execuing the program. Provide on line of c that can do that.
+
+  \begin{myanswer}
+  setuid(uid);
+  \end{myanswer}
+
+\item (5 points) What does the library call system() do?
+
+  \begin{myanswer}
+  The system call executes a command as if it were written on the command line using the effective user id.
+  \end{myanswer}
+
+\item (5 points) Explain how the environment variable PATH is used to select which program to execute when using execvp() or system() or in a shell?
+
+  \begin{myanswer}
+  The system calls check the current directory to see if there is a command that matches the one that the user wants to call. If there is not a program that matches the call, then check the parent directory and keep doing that until in the home directory.
+  It then defaults to the /bin directory of calls to call the program that the user wants.
+  \end{myanswer}
+
+\item (10 points) The following program has multiple security flaws. Describe how to exploit and provide at least one way to change the program to protect it from attack.
+\begin{verbatim}
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{system("cat smaple.db | cut -d ',' -f 3 | sort | uniq")}
+\end{verbatim}
+
+  \begin{myanswer}\begin{vetbatim}
+  We can exploit this program by writing our own "cat" or "cut" or "sort"  or "uniq" programs to execute whatever we want in the system. We can protect from this attact by specifying that we want
+  the commands to be called from the /bin directory
+  \end{verbatim}\end{myanswer}
+
+\item (10 points) The following program has two security flaws, describe how to exploit them.
+
+  \begin{enumerate}
+  \begin{verbatim}
+  int main()
+  {
+  char cmd[1024];
+  char fname[40];
+  printf("Enter file name:\n");
+  scanf(%s, fname);
+  snprintf(cmd, 1024, /bin/cat %s", fname);
+  system(cmd);
+  }
+  \end{verbatim}
+  \end{enumerate}
+
+  \begin{myanswer}
+  The first security flaw is buffer overflow for the command. The second is to close off the command using the  ";cmd" technique.
+  \end{myanswer}
+
+\item (10 points) Describe a solution to each of the security flaws you identified in the previous question
+
+  \begin{myanswer}
+  We can bound check the command string to make sure that it is withing the right size.
+  \end{myanswer}
+
+\item Consider yourself as a software developer designing a tool for your organization that takes advantage of different UNIX system tools. As such you wish to make use of the
+system() and popen() calls to inter operate with your tool and teh standard UNIX tools. Whie the tool needs to have high privelege leves, individual users may ned varying
+lesser levels, but not necessarily equal across users.
+
+\begin{enumerate}
+\item\texttt{(5 points) Describe three potential ethical and legal impacts on your organization (with respect to actions attackers could take) if your software was designed insecurely.}
+  \begin{myanswer}
+  Some potential impacts could be that an unauthorized user could elevate their privileges and do things that they shouldn't be doing.
+  \end{myanswer}
+
+\item\texttt{(5 points) Describe three coding practices you can employ to reduce the ethical and legal impacts of insecurity in your software.}
+  \begin{myanswer}
+  \end{myanswer}
+
+\end{enumerate}
+
+\end{enumerate}
+\end{document}

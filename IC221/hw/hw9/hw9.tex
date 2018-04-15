@@ -1,0 +1,323 @@
+\documentclass{article}[9pt]
+
+\usepackage{listings}
+\usepackage{fullpage}
+\usepackage{textcomp}
+\usepackage{mdframed}
+
+\lstset{ %
+  basicstyle=\ttfamily\scriptsize,
+  commentstyle=\ttfamily\scriptsize\emph,
+  upquote=true,
+  framerule=1.25pt,
+  breaklines=true,
+  showstringspaces=false,
+  escapeinside={(*@}{@*)},
+  belowskip=2em,
+  aboveskip=1em,
+}
+
+
+\newenvironment{answerfont}{\fontfamily{qhv}\selectfont}{\par}
+\newenvironment{myanswer}{\begin{mdframed}\begin{answerfont}}{\end{answerfont}\end{mdframed}}
+
+
+\title{HW 9}
+
+\author{Joshua Thompson}
+
+\date{March 17, 2018}
+
+\begin{document}
+
+\maketitle
+\section*{Questions}
+\label{sec:org3ac93b9}
+
+\begin{enumerate}
+\item (5 points) What does it mean that signals arrive asynchronously?
+
+\begin{myanswer}
+Means that the portions of the program are executed out of order. Especially when the program is waiting for signals to come from the hardware.
+\end{myanswer}
+
+
+\item (10 points) What signal is generated from the following keyboard-shortcut/command?
+
+\begin{enumerate}
+\item \texttt{Ctrl-c}
+
+  \begin{myanswer}
+  SIGINT
+  \end{myanswer}
+
+
+\item \texttt{Ctrl-z}
+
+  \begin{myanswer}
+  SIGSTP
+  \end{myanswer}
+
+\item \texttt{fg/bg}
+
+  \begin{myanswer}
+  SIGCNT
+  \end{myanswer}
+
+\item \begin{verbatim} Ctrl-\ \end{verbatim}
+
+  \begin{myanswer}
+  SIGKILL
+  \end{myanswer}
+\end{enumerate}
+
+\item (15 points) Run the command kill -1 to list all the signals and their signal numbers. Find either the matching signal-numbers/signal-name for the following
+values below. Additionally, for each signal, use man 7 signal to describe the default action of each.
+
+\begin{enumerate}
+\item \texttt{SIGKILL}
+
+  \begin{myanswer}
+  Number: 9 \n
+  Action: Term
+  \end{myanswer}
+
+
+\item \texttt{14}
+
+  \begin{myanswer}
+  Signal: SIGALRM \n
+  Action: Term
+  \end{myanswer}
+
+\item \texttt{SIGALRM}
+
+  \begin{myanswer}
+  Number: 14 \n
+  Action: Term
+  \end{myanswer}
+
+\item \texttt{SIGBRT}
+
+  \begin{myanswer}
+  Number: 6 \n
+  Action: Core
+  \end{myanswer}
+
+\item \texttt{21}
+
+  \begin{myanswer}
+  Signal: SIGTTIN \n
+  Action: Stop
+  \end{myanswer}
+
+
+\item \texttt{1}
+
+  \begin{myanswer}
+  Signal: SIGHUP \n
+  Action: Term
+  \end{myanswer}
+
+\item \texttt{SIGCHILD}
+
+  \begin{myanswer}
+  Number: 17 \n
+  Action: Term
+  \end{myanswer}
+
+\item \texttt{SIGTTOU}
+
+  \begin{myanswer}
+  Number: 22 \n
+  Action: Stop
+  \end{myanswer}
+\end{enumerate}
+
+\item (15 points) Provide a brief plain-English explanation, e.g., reference which signal is sent and to which processes, for each of the kill/killall commands.
+
+\begin{enumerate}
+\item \texttt{killall -17 sleep}
+
+  \begin{myanswer}
+  Terminates all children of sleep processes
+  \end{myanswer}
+
+
+\item \texttt{kill -9 2237}
+
+  \begin{myanswer}
+  Kills process 2237
+  \end{myanswer}
+
+\item \texttt{killall -SIGUSR1 a.out}
+
+  \begin{myanswer}
+  Performs a userdefined signal on all a.out processes
+  \end{myanswer}
+
+\item \texttt{kill -SIGABRT -1}
+
+  \begin{myanswer}
+  Performs abort signal
+  \end{myanswer}
+
+\item \texttt{killall sleep}
+
+  \begin{myanswer}
+  kills all sleep proceses
+  \end{myanswer}
+
+
+\item \texttt{killall -u}
+
+  \begin{myanswer}
+  kills all processes running as USER
+  \end{myanswer}
+
+\end{enumerate}
+
+\item On a lab machine, run the following program in the background. From the same terminal on the same machine, send the program the following two signals
+below and describe the results.
+
+  \begin{enumerate}
+  \item \texttt{(3 points) SIGUSR1}
+
+    \begin{myanswer}
+    The result is what looks like a cat with a message that says "Ha Ha, missed me!"
+    \end{myanswer}
+
+  \item \texttt{(3 points) SIGUSR2}
+
+    \begin{myanswer}
+    The result is a skull and crossbones with the message "You shot me!"
+    \end{myanswer}
+  \end{enumerate}
+
+\item Consider the program below and answer the associated questions:
+\begin{verbatim}
+int count = 0;
+
+void handler(int signum){
+
+  printf("You Shot Me!\n");
+  count++;
+
+  if(count > 3){
+    printf("I'm dead!\n");
+    exit(1);
+  }
+
+}
+
+int main(){
+
+  //establish signal hander for SIGTINT and SIGSTOP
+  signal(SIGTINT,handler);
+  signal(SIGTSTP,handler);
+
+  //loop forever
+  while(1);
+
+}
+\end{verbatim}
+
+\begin{enumerate}
+  \item \texttt{(3 points) what is the output of the program if the user hits Ctrl-c only once?}
+
+    \begin{myanswer}
+    Result is "You shot me!"
+    \end{myanswer}
+
+  \item \texttt{(3 points) what is the output of the program if the user hits Ctrl-c four times?}
+
+    \begin{myanswer}
+    \begin{verbatim}
+    Result is:
+    You shot me!
+    You shot me!
+    You shot me!
+    You shot me!
+    Im dead!
+    \end{verbatim}
+    \end{myanswer}
+
+  \item \texttt{(3 points) what is the output of the program if the user hits Ctrl-c three times and Ctrl-z once?}
+
+    \begin{myanswer}
+    \begin {verbatim}
+    Result is:
+    You shot me!
+    You shot me!
+    You shot me!
+    You shot me!
+    Im dead!
+    \end{verbatim}
+    \end{myanswer}
+\end{enumerate}
+
+\item (5 points) what does the system call pause() do? Yes, it pauses the program, of course, but until when does the program stay paused and why is it a useful command?
+
+  \begin{myanswer}
+  The pause() system call will pause the program until another signal is delieverd and handled. this is useful because it helps remove overhead. Example is an infinite
+  while loop will not continue to run, instead it will be interrupted and only start again when another signal is given.
+  \end{myanswer}
+
+\item (10 points) How many times does the program below print alarm? Explain.
+\begin{verbatim}
+int count = 10;
+
+void handler(int sugnum){
+
+  printf("Alarm!\n");
+  count /= 2;
+  alarm(count);
+
+}
+
+int main(){
+
+  signal(SIGALRM, handler);
+  alarm(count);
+
+  while(1)
+  pause();
+  }
+\end{verbatim}
+
+  \begin{myanswer}
+  Alarm is printed four times. This is because it is called the first time in the main, then the count happens in the handler. The alarm is then called three more times
+  from looping in the handler function.
+  \end{myanswer}
+
+\item (10 points) Convert the following use of signal() below to a sigaction() call.
+\begin{verbatim}
+signal(SIGUSR1, handler);
+\end{verbatim}
+
+  \begin{myanswer}
+  sigaction(SIGUSR1, &handler, NULL);
+  \end{myanswer}
+
+\item (5 points) what sigaction flag is used to ensure that system calls will be restarted when interrupted?
+
+  \begin{myanswer}
+  \begin{verbatim}
+  SA_RESTART
+  \end{verbatim}
+  \end{myanswer}
+
+\item (5 points) Provide an example of why the read() system call would need to be restarted due to a signal delivery.
+
+  \begin{myanswer}
+  read() system calls need to be restarted because they are not reentrant functions. A reentrant function does not require a signal to continue their function.
+  \end{myanswer}
+
+\item (5 points) Look in man 7 signal and kill -l and draw a picture of your favorite signal. Be sure to clearly identify it.
+
+  \begin{myanswer}
+  Question did not make sense. 
+  \end{myanswer}
+
+\end{enumerate}
+\end{document}

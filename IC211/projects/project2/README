@@ -1,0 +1,11 @@
+Joshua Thompson 206360
+
+Submitting up to part 5
+
+Known issues:
+
+->  Code does not pass parts 1 and 2 error handling due to specific error messages
+->  Code continues to run if an incorrect file is given as an argument
+->  Cannot give error for adding a user if they already exist
+->  cannot read corrupt data ciphertexts
+->  extra credit does not pass all of the exception throwing

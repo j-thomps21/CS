@@ -1,0 +1,40 @@
+Key Points:
+
+Section 5.1:
+  -> We create the illusion that we have unlimited memory
+  -> Principles of locality
+    -> Temporal Locality: If an item is referenced then it will likely be referenced again soon
+    -> Spacial Locality: If an item is referenced then items around it are likely to be referenced
+  -> Everything is in a memory hierarchy. More expensive, smaller, and faster to cheap, slow, and a lot
+    -> SRAM (cache)
+    -> DRAM
+    -> SSD
+    -> Large storage (HDD)
+  -> Hit rate, hit time, miss rate, miss penalty
+
+Section 5.3:
+  ->  Cache is the highest level of memory
+
+Section 5.5:
+  -> We need dependability in our memory hierarchy
+  -> Two Service states:
+    -> 1. Service accomplishment
+    -> 2. Service interruption
+      -> Transition from state 1 to 2 is cause by error
+      -> Transition from state 2 to 1 is caused by restoration
+  -> Lots of different acronyms to describe failures and times for failures
+  -> Ways to improve Mean time to repair
+    ->  Fault avoidance
+    ->  Fault tolerance
+    ->  Fault forecasting
+  ->
+  ->
+
+
+Confusing Parts:
+
+-> Pretty much the entire cache section
+-> Parity bits
+->
+->
+->
