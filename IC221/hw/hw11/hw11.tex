@@ -77,34 +77,44 @@ The header which stores the address and the payload which stores the data
   \begin{enumerate}
   \item \texttt{www.cis.upenn.edu}
     \begin{myanswer}
-    IPv4: 158.130.69.163\n
+    \begin{verbatim}
+    IPv4: 158.130.69.163
     IPv6: 2607:f470:8:64:5ea5::d
+    \end{verbatim}
     \end{myanswer}
 
   \item \texttt{www.cs.swarthmore.edu}
     \begin{myanswer}
+    \begin{verbatim}
     IPv4: 130.58.68.137
+    \end{verbatim}
     \end{myanswer}
 
   \item \texttt{www.usna.edu}
     \begin{myanswer}
+    \begin{verbatim}
     IPv4: 10.4.36.20
+    \end{verbatim}
     \end{myanswer}
 
   \item \texttt{facebook.com}
     \begin{myanswer}
-    IPv4: 31.13.69.228\n
+    \begin{verbatim}
+    IPv4: 31.13.69.228
     IPv6: 2a03:2880:f103:83:face:b00c:0:25de
+    \end{verbatim}
     \end{myanswer}
 
   \item \texttt{microsoft.com}
     \begin{myanswer}
-    IPv4: 104.43.195.251\n
-    IPv4: 23.100.122.175\n
-    IPv4: 23.96.52.53\n
-    IPv4: 191.239.213.197\n
-    IPv4: 104.40.211.35\n
+    \begin{verbatim}
+    IPv4: 104.43.195.251
+    IPv4: 23.100.122.175
+    IPv4: 23.96.52.53
+    IPv4: 191.239.213.197
+    IPv4: 104.40.211.35
     Microsoft changes IP addresses when running host multiple times.
+    \end{verbatim}
     \end{myanswer}
 
   \end{enumerate}
@@ -112,7 +122,7 @@ The header which stores the address and the payload which stores the data
 \item (10 points) What is the purpose of the port address? How many bytes and what C type would naturally store a port address?
 
   \begin{myanswer}
-  ***It is used to deliver the incoming message throughout the computer. Ports are heavily connected to applications.****
+  The port address tells the packet which process to go to, within the computer. It is a two-byte unsigned short
   \end{myanswer}
 
 \item (10 points) TCP provides reliable data transmission, but at what cost? Why might you want to use UDP over TCP?
@@ -125,63 +135,75 @@ The header which stores the address and the payload which stores the data
 \item (20 points) For each of the descriptions below of a network type, indicate the type that best matches that description.
 
   \item \texttt{Specifies the address type, eg AF_INET, for the addrinfo structure}
-    \begin{myanswer}\begin{vetbatim}
+    \begin{myanswer}\begin{verbatim}
     ai_family
     \end{verbatim}\end{myanswer}
 
   \item \texttt{Specifies the address type for sockaddr structure}
-    \begin{myanswer}\begin{vetbatim}
-    
+    \begin{myanswer}\begin{verbatim}
+    sin_family
     \end{verbatim}\end{myanswer}
 
   \item \texttt{A type defined as a uint32}
-    \begin{myanswer}\begin{vetbatim}
+    \begin{myanswer}\begin{verbatim}
+    s_addr
     \end{verbatim}\end{myanswer}
 
   \item \texttt{A generic address structure for sockets}
-    \begin{myanswer}\begin{vetbatim}
+    \begin{myanswer}\begin{verbatim}
+    struct saddr
     \end{verbatim}\end{myanswer}
 
   \item \texttt{A structure to store an IPv4 internet address}
-    \begin{myanswer}\begin{vetbatim}
+    \begin{myanswer}\begin{verbatim}
+    in_addr
     \end{verbatim}\end{myanswer}
 
   \item \texttt{An unsigned short storing the port for a sockaddr_in}
-    \begin{myanswer}\begin{vetbatim}
+    \begin{myanswer}\begin{verbatim}
+    sin_port
     \end{verbatim}\end{myanswer}
 
   \item \texttt{Structure used to hint at IP addresses for resolving as well as storing results}
-    \begin{myanswer}\begin{vetbatim}
+    \begin{myanswer}\begin{verbatim}
+    addrinfo
     \end{verbatim}\end{myanswer}
 
   \item \texttt{Member of the sockaddr_in that stores the address}
-    \begin{myanswer}\begin{vetbatim}
+    \begin{myanswer}\begin{verbatim}
+    struct in_addr
     \end{verbatim}\end{myanswer}
 
   \item \texttt{The sole member of the in_addr structure}
-    \begin{myanswer}\begin{vetbatim}
+    \begin{myanswer}\begin{verbatim}
+    s_addr
     \end{verbatim}\end{myanswer}
 
   \item \texttt{A generic socket address returned in addrinfo}
-    \begin{myanswer}\begin{vetbatim}
+    \begin{myanswer}\begin{verbatim}
+    struct sockaddr
     \end{verbatim}\end{myanswer}
 
   \item \texttt{A specific address structure for sockets to store IP, port pairs}
-    \begin{myanswer}\begin{vetbatim}
+    \begin{myanswer}\begin{verbatim}
+    sockaddr
     \end{verbatim}\end{myanswer}
 
 \item (5 points) The following functions are opposites, inet_ntoa() and inet_aton(), what are their purposes? Give example.
 
   \begin{myanswer}
+  \begin{verbatim}
+  inet_ntoa() is used to convert a struct into an IP address. inet_aton() does the opposite.
+  \end{verbatim}
   \end{myanswer}
 
-\item (5 points) When assign a port to a socket address, which of these two conversion should you use and why? htnos() vs nths().
+\item (5 points) When assign a port to a socket address, which of these two conversion should you use and why? htnos() vs ntohs().
 
   \begin{myanswer}
-  We can bound check the command string to make sure that it is withing the right size.
+  We use htons() because of network byte order.
   \end{myanswer}
 
-\item (10 points) Consider setting the adress 10.4.32.41 on port 22. Complete the code below to do that.
+\item (10 points) Consider setting the address 10.4.32.41 on port 22. Complete the code below to do that.
 
 \begin{enumerate}
 \begin{verbatim}
@@ -194,6 +216,8 @@ struct sockaddr_in saddr;
 \begin{verbatim}
 struct: sockaddr_in saddr;
 
+saddr = (struct sockaddr_in*) result->ai_addr;
+saddr->sin_port = htnos(80);
 \end{verbatim}
 \end{myanswer}
 
