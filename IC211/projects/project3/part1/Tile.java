@@ -6,7 +6,6 @@ import javax.swing.border.*;
 
 public class Tile extends JPanel
 {
-
   public Tile()
   {
     super(new FlowLayout());

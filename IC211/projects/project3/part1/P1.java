@@ -1,5 +1,3 @@
-
-
 import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -10,8 +8,18 @@ import javax.swing.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+/**
+ * Class P1 used to create a basic Tile GUI
+ * @author Thompson, Joshua - 206360
+ */
 public class P1
 {
+  /**
+   * Creates a new JFrame which contrains a Tile object and other JLabels,
+   * labeling north, south, east, and west
+   * @param args none
+   */
   public static void main(String[] args)
   {
     JFrame jf = new JFrame();
