@@ -1,0 +1,150 @@
+\documentclass{article}[9pt]
+
+\usepackage{listings}
+\usepackage{fullpage}
+\usepackage{textcomp}
+\usepackage{mdframed}
+
+\lstset{ %
+  basicstyle=\ttfamily\scriptsize,
+  commentstyle=\ttfamily\scriptsize\emph,
+  upquote=true,
+  framerule=1.25pt,
+  breaklines=true,
+  showstringspaces=false,
+  escapeinside={(*@}{@*)},
+  belowskip=2em,
+  aboveskip=1em,
+}
+
+
+\newenvironment{answerfont}{\fontfamily{qhv}\selectfont}{\par}
+\newenvironment{myanswer}{\begin{mdframed}\begin{answerfont}}{\end{answerfont}\end{mdframed}}
+
+
+\title{HW 12}
+
+\author{Joshua Thompson}
+
+\date{April 22, 2018}
+
+\begin{document}
+
+\maketitle
+\section*{Questions}
+\label{sec:org3ac93b9}
+
+\begin{enumerate}
+\item (20 points) For each of the following system calls, provide a breif, one sentence description:
+
+  \begin{enumerate}
+  \item \texttt{socket()}
+    \begin{myanswer}
+    The first argument takes the domain of the socket, the second takes the type of socket which describes what transport protocol to use, the third argument describes further protocol information.
+    The call returns a file descriptor if successful or -1 if failure.
+    \end{myanswer}
+
+  \item \texttt{bind()}
+    \begin{myanswer}
+    First argument takes an open socket from the socket() call, the second takes a reference to a socket address to be bound, and the third argument takes the size of the socket address.
+    The call returns a 0 if successful or -1 if not.
+    \end{myanswer}
+
+  \item \texttt{accept()}
+    \begin{myanswer}
+    First argument takes server socket that has already been bound, second argument takes a reference to a socket address structure of the client, the third argument is a pointer to a size reference to the address.
+    Returns an integer 0 for success or -1 for failure.
+    \end{myanswer}
+
+  \item \texttt{listen()}
+    \begin{myanswer}
+    The first argument is the server socket file descriptor and the second is the backlog argument which indicates to the OS how many incoming connections should be allowed to queue prior to the accept call.
+    Returns 0 or -1 for success or failure.
+    \end{myanswer}
+
+  \item \texttt{connect()}
+    \begin{myanswer}
+    First argument takes the open socket file descriptor, the second takes the address of the socket, and the last takes the size of the socket.
+    Returns integer for success of the call or failure.
+    \end{myanswer}
+
+  \item \texttt{close()}
+    \begin{myanswer}
+    Only arguement is the socket that needs to be closed.
+    \end{myanswer}
+\end{enumerate}
+
+\item (20 points) For each of the arguments and return value in the socket() call below, briefly explain their meaning for the socket being opened.
+  \begin{enumerate}
+  \begin{verbatim}
+  int sock;
+  sock = socket(AF_INET, SOCK_STREAM, 0);
+  \end{verbatim}
+  \end{enumerate}
+
+  \begin{myanswer}
+  socket() call returns a file descriptor to the sock variable, using the AF_INET domain, SOCK_STREAM type and nothing extra for the protocol.
+  \end{myanswer}
+
+
+\item (10 points) For each of the arguments and return value in the connet() call below, briefly explain their meaning for the connection being established.
+  \begin{enumerate}
+  \begin{verbatim}
+  int res;
+  res = connect(sock, (struct sockaddr*) saddr_in, sizeof(saddr_in));
+  \end{verbatim}
+  \end{enumerate}
+
+  \begin{myanswer}
+  The connect() call is connecting a sock file descriptor to a server address.
+  \end{myanswer}
+
+
+\item (5 points) Explain why when accepting an incoming connection, a new socket is created and returned.
+
+  \begin{myanswer}
+  This is because the server may want to continue to use the socket to accept further incoming connections.
+  \end{myanswer}
+
+\item (5 points) Explain the second argument to listen(), the backlog. What does this argument refer to and what does it mean.
+
+  \begin{myanswer}
+  The backlog argument indicates to the OS how many incoming connections should be allowed to queue prior to the accept() before starting to reject connections.
+  \end{myanswer}
+
+
+\item (10 points) Look at the output from the hello_server program in the course notes. Why does the port change from the client to the server?
+
+    \begin{myanswer}
+    
+    \end{myanswer}
+
+
+\item (10 points) Condiser the code loop for handling client sockets: Can this program handle multiple clients simultaneously? That is, if multiple clients are connected, will the server be able to service all the sockets when data is available? Explain.
+  \begin{enumerate}
+  \begin{verbatim}
+    char buf[BUF_SIZE];
+    int sockets[NUMSOCKS], i,n;
+    //iterate over all open sockets
+    for(i=0;i < NUMSOCKS; i++){
+      if(i>0){
+        //read from socket
+        n = read(sockets[i], buf, BUF_SIZE);
+        //socket closed
+        if(n<0){
+          close(sockets[i]);
+          sockets[i] = -1;
+        }
+
+        //echo back
+        write(sockets[i], buf, n);
+      }
+     }
+  \end{verbatim}
+  \end{enumerate}
+
+  \begin{myanswer}
+  \end{myanswer}
+
+\end{enumerate}
+\end{document}

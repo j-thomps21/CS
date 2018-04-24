@@ -1,0 +1,14 @@
+Key Points:
+
+-> Pipelining means multiple instructions overlapped in execution
+-> things executed faster and more efficiently
+-> Speed increase is equal to how many stages there are in the pipeline
+-> MIPS designed for Pipelining
+  ->  all instrucions are the same length
+-> Hazards
+  -> structural hazard = hardware cant support the combination of instructions that we want to execute
+  -> Data hazard = pipeline needs to be stalled because one step must wait for another to complete
+  -> Control hazard = needing to make a decision based on results of one instruction while otheres are executing
+-> Pipelining shows potential for parallelism especially instruction level parallelism
+  -> Increasing the depth of the pipeline to overlap more instruction
+  -> replicate the internal components of the computer so it can launch multiple instrucitons every stage
