@@ -9,7 +9,7 @@ public class Tile extends JPanel
   private Pos coord;
   private Color tcolor;
   private TileListener tl;
-  private boolean state;
+  private boolean state, dead;
 
   public Tile(int i, int j, Color c)
   {
@@ -21,6 +21,14 @@ public class Tile extends JPanel
     coord = new Pos(i, j);
     tcolor = c;
     tl = new TileListener(this);
+    state = false;
+    dead = false;
+  }
+
+  public Tile()
+  {
+    state = false;
+    tcolor = Color.white;
   }
 
   public void addTileListener(TileListener tl)
@@ -36,6 +44,11 @@ public class Tile extends JPanel
   public int getCol()
   {
     return coord.getCol();
+  }
+
+  public Pos getPos()
+  {
+    return coord;
   }
 
   public String toString()
@@ -55,11 +68,30 @@ public class Tile extends JPanel
 
   public void activated()
   {
-    tl.activated(this);
+    if(!dead)
+      tl.activated(this);
   }
 
   public void deactivated()
   {
-    tl.deactivated(this);
+    if(!dead)
+      tl.deactivated(this);
+  }
+
+  public boolean getState()
+  {
+    return state;
+  }
+
+  public void stateToFalse()
+  {
+      state = false;
+  }
+
+  public void kill()
+  {
+    dead = true;
+    tcolor = Color.white;
+    this.setBackground(tcolor);
   }
 }

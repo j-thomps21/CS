@@ -4,7 +4,6 @@ import java.awt.event.MouseListener;
 
 public class TileClickListener implements MouseListener
 {
-  private boolean action = false;
   private Tile t;
 
   public TileClickListener(Tile t)
@@ -14,14 +13,10 @@ public class TileClickListener implements MouseListener
 
   public void mouseClicked(MouseEvent e)
   {
-    if(action == false)
-    {
+    if(!t.getState())
       t.activated();
-    }
     else
-    {
       t.deactivated();
-    }
     System.out.println();
   }
 
