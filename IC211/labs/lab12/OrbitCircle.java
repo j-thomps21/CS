@@ -7,6 +7,12 @@ import java.awt.geom.*;
 import java.awt.image.*;
 
 
+/**
+ * Class OrbitCircle creates the circles that we see on the screen in the gui.
+ * They also come with equations that can be used to simulate the circles orbiting
+ * each other similarly to planetary orbits.
+ * @author Thompson, Joshua - 206360
+ */
 public class OrbitCircle extends JComponent
 {
   Graphics2D g2;
@@ -21,6 +27,10 @@ public class OrbitCircle extends JComponent
   private Ellipse2D secondaryOrbit;
   private Ellipse2D secondaryPlanet;
 
+  /**
+   * Constructor for the OrbitCircle class. Just sets the
+   * Preferred Size of the graphics object and sets the values of the data fields.
+   */
   public OrbitCircle()
   {
     super();
@@ -37,6 +47,10 @@ public class OrbitCircle extends JComponent
     r1 = 150/2;
   }
 
+  /**
+   * This method creates all the Ellipse objects and draws them to the screen
+   * @param g Takes a graphics object and casts it to a Graphics2D
+   */
   protected void paintComponent(Graphics g)
   {
     super.paintComponent(g);
@@ -50,28 +64,27 @@ public class OrbitCircle extends JComponent
     secondaryOrbit =  new Ellipse2D.Double(x2, y2, 150, 150);
     secondaryPlanet = new Ellipse2D.Double(x3, y3, 10, 10);
 
-    draw();
-  }
-
-  public void moveOne()
-  {
-    a0++;
-    a1++;
-
-    x1 = (x0 + r0*Math.cos(a0));
-    y1 = (y0 + r0*Math.sin(a0));
-    x2 = (x1 + r1*Math.cos(a1));
-    y2 = (y1 + r1*Math.sin(a1));
-  }
-
-  public void draw()
-  {
-    System.out.println("Drawing");
     g2.setColor(new Color(255,51,255,255));
     g2.draw(mainOrbit);
     g2.fill(mainPlanet);
     g2.setColor(new Color(155, 51, 255, 255));
     g2.draw(secondaryOrbit);
     g2.fill(secondaryPlanet);
+  }
+
+  /**
+   * Incrememnts the angle variables and calculates the new positions of the circles. 
+   */
+  public void moveOne()
+  {
+    a0++;
+    a1 = 3*a0;
+
+    x1 = ((x0 + r0) + r0*Math.cos(Math.toRadians(a0))) - 5;
+    y1 = ((y0 + r0) + r0*Math.sin(Math.toRadians(a0))) - 5;
+    x2 = ((x0 + r0) + r0*Math.cos(Math.toRadians(a0))) - r1;
+    y2 = ((y0 + r0) + r0*Math.sin(Math.toRadians(a0))) - r1;
+    x3 = ((x2 + r1) + r1*Math.cos(Math.toRadians(a1))) - 5;
+    y3 = ((y2 + r1) + r1*Math.sin(Math.toRadians(a1))) - 5;
   }
 }
