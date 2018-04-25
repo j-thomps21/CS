@@ -3,7 +3,7 @@ import java.awt.*;
 import java.util.*;
 import java.io.*;
 
-public class P2
+public class P3
 {
   public static void main(String[] args)
   {

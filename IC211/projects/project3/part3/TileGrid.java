@@ -13,7 +13,6 @@ public class TileGrid extends JPanel
       {
         Tile t = new Tile(j, i, colorArray[i][j]);
 
-        //this.setBackground(colorArray[i][j]);
         this.add(t);
       }
     }
