@@ -4,9 +4,9 @@ import java.awt.*;
 
 public class TileFrame extends JFrame
 {
-  private Tile[][] tileGrid;
-  private Tile t1, t2;
-  private JPanel jp, all, top;
+  private static Tile[][] tileGrid;
+  private static Tile t1, t2;
+  private JPanel jp;
   private JButton startButton;
   private boolean exitReady;
 
@@ -18,22 +18,22 @@ public class TileFrame extends JFrame
     t1 = new Tile();
     t2 = new Tile();
     jp = new JPanel(new GridLayout(6,6));
-    all = new JPanel(new BorderLayout());
-    top = new JPanel(new FlowLayout());
+    JPanel all = new JPanel(new BorderLayout());
+    JPanel b = new JPanel(new FlowLayout());
     startButton = new JButton("start");
     startButton.addActionListener(new StartButtonListener(this, startButton));
-    top.add(startButton);
+    b.add(startButton);
 
     //Creates an array of Tiles
     for(int i = 0; i < 6; i++)
     {
       for(int j = 0; j < 6; j++)
       {
-        tileGrid[i][j] = new Tile(j, i, c[i][j], this);
+        tileGrid[i][j] = new Tile(j, i, c[i][j]);
         jp.add(tileGrid[i][j]);
       }
     }
-    all.add(top, BorderLayout.NORTH);
+    all.add(b, BorderLayout.NORTH);
     all.add(jp, BorderLayout.CENTER);
     this.add(all);
     this.setLocation(400, 400);
@@ -41,7 +41,7 @@ public class TileFrame extends JFrame
     this.pack();
   }
 
-  public void activatedTiles(Tile t)
+  public static void activatedTiles(Tile t)
   {
     if(t1.getColor().toString().equals(Color.white.toString()))
     {
@@ -54,7 +54,7 @@ public class TileFrame extends JFrame
     }
   }
 
-  public void resetTestTiles()
+  public static void resetTestTiles()
   {
     t1.manualReset();
     t2.manualReset();
@@ -63,7 +63,7 @@ public class TileFrame extends JFrame
   }
 
 
-  public void checkMatch()
+  public static void checkMatch()
   {
     if(t1.equals(t2.getPos()))
     {
@@ -94,7 +94,7 @@ public class TileFrame extends JFrame
     }
   }
 
-  public boolean checkAllDead()
+  public static boolean checkAllDead()
   {
     for(int i = 0; i < 6; i++)
     {
@@ -113,6 +113,7 @@ public class TileFrame extends JFrame
     {
       for(int j = 0; j < 6; j++)
       {
+        System.out.println("toggling listeners");
         if(!tileGrid[i][j].getDead())
         {
           tileGrid[i][j].toggleListen();
@@ -126,11 +127,5 @@ public class TileFrame extends JFrame
   public boolean getExitReady()
   {
     return exitReady;
-  }
-
-  public void addTimerLabels(JLabel time)
-  {
-    top.add(time);
-    this.repaint();
   }
 }

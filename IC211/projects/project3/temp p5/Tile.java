@@ -14,7 +14,7 @@ public class Tile extends JPanel
   private TileListener tl;
   private boolean state, dead, mousePress, listen;
 
-  public Tile(int i, int j, Color c, TileFrame tf)
+  public Tile(int i, int j, Color c)
   {
     super(new FlowLayout());
     super.setPreferredSize(new Dimension(100,100));
@@ -23,7 +23,7 @@ public class Tile extends JPanel
     addMouseListener(new TileClickListener(this));
     coord = new Pos(i, j);
     tcolor = c;
-    tl = new TileListener(this, tf);
+    tl = new TileListener(this);
     state = false;
     dead = false;
     mousePress = false;

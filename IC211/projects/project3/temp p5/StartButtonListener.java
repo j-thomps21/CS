@@ -8,7 +8,6 @@ public class StartButtonListener implements ActionListener
   private boolean pause, exitReady;
   private TileFrame tf;
   private JButton startButton;
-  private TimerThread ttimer;
 
   public StartButtonListener(TileFrame tf, JButton startButton)
   {
@@ -16,7 +15,6 @@ public class StartButtonListener implements ActionListener
     exitReady = false;
     this.tf = tf;
     this.startButton = startButton;
-    ttimer = new TimerThread(tf, this);
   }
 
   public void actionPerformed(ActionEvent e)
@@ -37,12 +35,5 @@ public class StartButtonListener implements ActionListener
     }
     startButton.repaint();
     tf.toggleStopTileClick();
-
-    if(!ttimer.interrupted())
-      ttimer.start();
-    else
-      ttimer.interrupt();
   }
-
-
 }
