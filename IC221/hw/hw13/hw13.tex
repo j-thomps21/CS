@@ -1,0 +1,242 @@
+\documentclass{article}[9pt]
+
+\usepackage{listings}
+\usepackage{fullpage}
+\usepackage{textcomp}
+\usepackage{mdframed}
+
+\lstset{ %
+  basicstyle=\ttfamily\scriptsize,
+  commentstyle=\ttfamily\scriptsize\emph,
+  upquote=true,
+  framerule=1.25pt,
+  breaklines=true,
+  showstringspaces=false,
+  escapeinside={(*@}{@*)},
+  belowskip=2em,
+  aboveskip=1em,
+}
+
+
+\newenvironment{answerfont}{\fontfamily{qhv}\selectfont}{\par}
+\newenvironment{myanswer}{\begin{mdframed}\begin{answerfont}}{\end{answerfont}\end{mdframed}}
+
+
+\title{HW 13}
+
+\author{Joshua Thompson}
+
+\date{April 29, 2018}
+
+\begin{document}
+
+\maketitle
+\section*{Questions}
+\label{sec:org3ac93b9}
+
+\begin{enumerate}
+
+\item (15 points) For each of the statements, indicate if the statment is true or false. Add a brief statement to support the claim
+\begin{enumerate}
+  \item Threads are created just like processes by calling fork() except instead of checking the return value of fork() a specific funtion is used.
+  \begin{myanswer}
+  False, threads created using clone()
+  \end{myanswer}
+
+  \item Threads are scheduled just like other processes because POSIX threads are treated like individual processes by the OS.
+  \begin{myanswer}
+  False, they are treated as a single process
+  \end{myanswer}
+
+  \item Like multiple processes, threads provide resource isolation. Two threads from the same program do not share memory or other resources
+  \begin{myanswer}
+  False, threads share the same memory
+  \end{myanswer}
+
+  \item It's not possible for two threads of the same process to run simultaneously
+  \begin{myanswer}
+  False
+  \end{myanswer}
+
+  \item When any of the threads terminates, such as a call to exit(), all threads eliminate
+  \begin{myanswer}
+  True, threads all run on the same process
+  \end{myanswer}
+\end{enumerate}
+
+\item (5 points) What are the equivalent thread commands for the following system calls:
+\begin {enumerate}
+  \item fork()
+  \begin{myanswer}
+  clone()
+  \end{myanswer}
+
+  \item wait()
+  \begin{myanswer}
+  pthread\_join()
+  \end{myanswer}
+\end{enumerate}
+
+\item (15 points) Match the following terms, identifiers, funcitons to the descriptions below. (Online)
+\begin{enumerate}
+  \item Retrieve the POSIX thread identifier for the calling thread
+  \begin{myanswer}
+  pthread\_self()
+  \end{myanswer}
+
+  \item The process identifier, shared by all threads of a multi-threaded program
+  \begin{myanswer}
+  pid
+  \end{myanswer}
+
+
+  \item Retrieve the UNIX OS thread identifier of the calling thread
+  \begin{myanswer}
+  syscall(SYS\_gettid)
+  \end{myanswer}
+
+
+  \item Retrieve the UNIX OS process identifier of the calling process
+  \begin{myanswer}
+  getpid()
+  \end{myanswer}
+
+ \item the type of a POSIX thread identifier
+  \begin{myanswer}
+  pthread\_t
+  \end{myanswer}
+
+  \item The type of the UNIX OS thread identifier
+  \begin{myanswer}
+  pid\_t
+  \end{myanswer}
+
+
+  \item The thread identifier, unique to each thread and equal to the pid of the main thread
+  \begin{myanswer}
+  tid
+  \end{myanswer}
+\end{enumerate}
+
+\item (5 points) Complete the program given online. The thread should print the command line argument passed to it.
+\begin{myanswer}
+\begin{verbatim}
+void * startup(void * args){
+  char * str = (char*)args;
+  printf("%s", str);
+  return NULL;
+}
+
+int main(int argc, char * argv[]){
+  pthread_t thread;
+
+  pthread_create(&thread, NULL, startup, argv[1]);
+
+  pthread_join(thread, NULL);
+  return 0;
+}
+\end{verbatim}
+\end{myanswer}
+
+\item Answer the following Questions about the given program online. You could assume this would be run on a lab machine; if you wanted to run it to answer the questions.
+\begin{enumerate}
+  \item (5 points) Based on the code, what are the two possible values for the argument to foo()?
+  \begin{myanswer}
+  1 or NULL
+  \end{myanswer}
+
+  \item (5 points) When you run this program, how many threads are running. You could use ps -l to count.
+  \begin{myanswer}
+  9
+  \end{myanswer}
+
+  \item (5 points) According to top what percent CPU does the program consume? Explain
+  \begin{myanswer}
+  900%
+  \end{myanswer}
+
+\end{enumerate}
+
+\item (5 points) Explain why the following code snippet is not Atomic?
+\begin{enumerate}
+\begin{verbatim}
+balance = balance+1;
+\end{verbatim}
+\end{enumerate}
+
+\begin{myanswer}
+During the addition the added part of the is stored in a temp variable before it is saved to the l value of balance. In between these actions the thread could try to access the variable and change it before the value can be saved to the l value.
+The action can be interrupted.
+\end{myanswer}
+
+\item (5 points) For the code online, what is the expected output? Would you always get what you expect? Explain
+\begin{myanswer}
+"shared: 200" is expected but that will not always be the output because of the use of non atomic code. If scheduling changes, the output can become different.
+\end{myanswer}
+
+\item (5 points) For the code in the previous questions, identify the critical section. What makes this section critical?
+\begin{myanswer}
+shared++ because it is non atomic
+\end{myanswer}
+
+\item (5 points) Consider the naive locking solution shown online. Does this prove proper locking? Explain why or why not.
+\begin{myanswer}
+No because the the operations are not atomic. If the threads switch between the while command and the lock statement, there can be issues.
+\end{myanswer}
+
+\item (5 points) Explain why using mutex avoids issues of a lack of atomicity in lock acquisition?
+\begin{myanswer}
+Mutex avoids these issues becaue it is always guaranteed to be atomic during operation. The mutex itself is a lock and has functions for locking and unlocking.
+\end{myanswer}
+
+\item (10 points) The code shown online uses a coarse locking strategy, rewrite it to use fine locking.
+\begin{myanswer}
+\begin{verbatim}
+
+pthread_mutext_t b_lock, c_lock;
+
+int avail = MAX_FUNDS;
+int local_1 = 0;
+int local_2 = 0;
+
+void * fun(void * args){
+  int v,i;
+
+  for(i=0; i < 100; i++){
+    v = random() % 100;
+
+
+    if(avail - v > 0){
+      avail -= v;
+    }
+
+    if(random() % 2){
+      pthread_mutext_lock(&b_lock);
+      local_1 += v;
+      pthread_mutext_unlock(&b_lock);
+    }else{
+      pthread_mutext_lock(&c_lock);
+      local_2 += v;
+      pthread_mutext_unlock(&c_lock);
+    }
+
+  }
+
+  return NULL;
+}
+\end{verbatim}
+\end{myanswer}
+
+\item (5 points) What is deadlock? Provide a small code example of how deadlock can arise.
+\begin{myanswer}
+A deadlock is when two threads each hold a resource the other is waiting on. Example is the dining philosophers.
+\end{myanswer}
+
+\item (5 points) Explain a strategy to avoid deadlock.
+\begin{myanswer}
+A way to avoid deadlock is to order the way we give resources out to the threads so that they always have enough to continue.
+\end{myanswer}
+
+
+\end{enumerate}
+\end{document}

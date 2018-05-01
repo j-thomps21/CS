@@ -116,7 +116,7 @@
 \item (10 points) Look at the output from the hello_server program in the course notes. Why does the port change from the client to the server?
 
     \begin{myanswer}
-    
+    The port changes from the client to the server because it doesn't matter what port the client uses to communicate. It only matters that the client and the server agree on the port that they are using to communicate.
     \end{myanswer}
 
 
@@ -144,6 +144,7 @@
   \end{enumerate}
 
   \begin{myanswer}
+  No, it cannot handle multiple clients because while the server is waiting for something to happen with one client, all the others will just be waiting for something to happen with that client. 
   \end{myanswer}
 
 \end{enumerate}

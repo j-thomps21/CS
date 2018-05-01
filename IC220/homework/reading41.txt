@@ -1,0 +1,10 @@
+Key Points:
+
+-> Parallel execution easier when the tasks are independent of each other
+-> when tasks need to cooperate they need to be synchronized
+  -> comes from some user declared routines and hardware level instructions
+  -> lock and unlock synchronization
+-> need hardware primitives
+-> processor performance is tied to Moore's law (except it has ended for CPUs)
+-> hard to make good processors thats easy to program for
+  -> hard to take advantage of all the cores and put them to good use 
