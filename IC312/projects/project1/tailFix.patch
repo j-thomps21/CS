@@ -1,0 +1,13 @@
+*** LinkedList.java	2018-09-16 11:49:15.400168941 -0400
+--- NewLinkedList.java	2018-09-16 11:53:12.955765415 -0400
+***************
+*** 124,129 ****
+--- 124,131 ----
+      if(i==0){
+        Node newNode = new Node(e);
+        newNode.setNext(n);
++       if (n==null)
++         tail=newNode;
+        return newNode;
+      }
+  

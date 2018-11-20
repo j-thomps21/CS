@@ -1,0 +1,16 @@
+Using the program:
+
+You must compile all of the given java files in order for the Router class to work.
+
+How to compile: javac *.java
+Run command: java Router
+
+The Router class is what you will be running to get the desired output (none of the
+other classes have main methods inside). Simply using the command "java Router" will
+show you how to use the program. It takes two files, a Routing table file of a specific
+format (I will include the Table 1: Routing Table which is in the required format), and
+the input IP file that uses the binary IPs. Because the program takes in a routing table
+file, it allows the program to be more versatile and simulate a router that has a different
+routing table than the one that was specfied in the project page.
+
+My program should work 100%

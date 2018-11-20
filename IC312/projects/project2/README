@@ -1,0 +1,60 @@
+----------------------------------------------------------------------------
+Name:  Joshua Thompson
+Alpha: 206360
+
+Hours: 15
+----------------------------------------------------------------------------
+
+While there is *no* collaboration with your classmates allowed on the
+project, please use this space to indicate any resources you used,
+such as MGSP, instructor, on-line resources.
+
+Only help I recieved was from some online resources regarding researching
+HashSets. Specifically java's version of HashSet, HashMap, and LinkedHashMap.
+
+Used StackOverflow and geeksforgeeks.org
+
+----------------------------------------------------------------------------
+
+Complete the following information regarding your program.
+
+
+* What did you learn from this assignment?
+
+  I learned how to implement a BST, an AVL, and a Hash table with
+  the Set interface. I also learned how to troubleshoot methods when they
+  weren't running as fast as they should have been.
+
+* What part of the assignment was easier then you expected?
+
+  Implementing BST was easier than I expected (mainly because we mostly
+  did it in a previous homework). AVL was also (for the most part) easier
+  than I expected.
+
+* What part of the assignment was harder then you expected?
+
+  Completing the board class was much harder than I expected. I realized that
+  using 8 recursive IF statements was probably not the most elegant way to
+  call the recursive methods because it led to a lot of typos that broke
+  the program.
+
+* What would you suggest for improving this assignment?
+
+  I feel like the *recommended* steps for the board class could give a little
+  more guidance. Otherwise I felt that the project was good.
+
+* Any additional information you'd like to share regarding this assignment?
+
+
+-----------
+DESCRIBE YOUR DATA STRUCTURE BELOW
+
+My data structure is my best representation of java's version of HashSet using
+separate chaining. The main array of the HashTable uses an ArrayList and at each
+index, I made a linked list of Nodes. When I add items into the HashSet, I calculate
+their index using java's hashCode and just mod the integer to the max size of the
+ArrayList. At that particular index, I add the new node to the back of the list
+(or the front if it is the first element to be added). After adding, I calculate the
+load factor to see if it is within the correct parameter. If it is bigger, I just
+double the size of the arraylist, and call the add() method on each of the items
+so that they are all put into new indexes. 

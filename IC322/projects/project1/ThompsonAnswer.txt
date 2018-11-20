@@ -1,0 +1,32 @@
+IP address: 1.1.1.1
+Longest Matching Prefix: 00000001
+Outbound interface:  Fa 0/0
+
+IP address: 1.0.100.1
+Longest Matching Prefix: 000000010000000001100100
+Outbound interface:  Fa 0/1
+
+IP address: 240.240.240.240
+Longest Matching Prefix: *
+Outbound interface:  Gi 3/1
+
+IP address: 101.5.7.33
+Longest Matching Prefix: 011001010000010100000111001000
+Outbound interface:  Fa 0/7
+
+IP address: 101.5.7.42
+Longest Matching Prefix: 0110010100000101
+Outbound interface:  Fa 0/6
+
+IP address: 223.5.99.101
+Longest Matching Prefix: 11011111
+Outbound interface:  Fa 2/6
+
+IP address: 223.4.99.101
+Longest Matching Prefix: 1101111100000100
+Outbound interface:  Gi 1/1
+
+IP address: 209.5.99.101
+Longest Matching Prefix: *
+Outbound interface:  Gi 3/1
+

@@ -1,0 +1,19 @@
+Joshua Thompson README
+
+Citations: Used ideas from FixedList.java which was sent out in a previous homework by Prof Taylor. Also used some notes I took in class
+I also used the file called "TestAL" to test whether my ArrayList and CircularArrayList were working.
+
+1. I completed all the way to implementing a CircularArrayList and getting both SolveMaze and DrawMaze to work
+
+2. This project took me around 8 - 10 hours to complete
+
+3. I learned a lot about how queues and stacks work when they are implemented with either LinkedLists or ArrayLists.
+   Also learned how to create an ArrayList class.
+
+4. At first the project was a lot easier than I expected but once I realised that I had to also implement an ArrayList
+   and CircularArrayList, I had a tough time.
+
+5. implementing the CircularArrayList was harder than expected.
+
+6. It was not completely clear to me that I did not have to use an ArrayList for both SolveMaze and DrawMaze.
+   I was trying for hours to get SolveMaze to work with an ArrayList only to realize that I never had to in the first place.
